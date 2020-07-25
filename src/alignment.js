@@ -21,9 +21,16 @@ class NeedlemanWunschSimilarity {
         this.match = match;
         this.mismatch = mismatch;
         this.gap = gap;
-
         this.matrix = [];
+        this.initializeMatrix();
+    }
 
+    /**
+     * fills matrix with cells, grouped in nested arrays to represent matrix
+     * sets the value of first row/cells based on gap value
+     * sets the x/y value
+     */
+    initializeMatrix(){
         // initialize the value-empty matrix with cells
         // this.sequence[...-1] because at 0/0 the matrix has null as x/y-values
         for (let y = 0; y <= this.sequence_a.length; y++) {
