@@ -11,6 +11,7 @@ class Cell {
         this.top_left_ascender = null;
         this.left_ascender = null;
         this.final_score = null;
+        this.next = null;
     }
 }
 
@@ -65,7 +66,69 @@ class NeedlemanWunschSimilarity {
             }
         }
     }
+
+    /**
+     * assign each empty field a final value decided by the
+     * value calculated by adding the match/mismatch/gap value
+     * of top, top-left and left ascended
+     * skip first row, because it is already fully filled with gap values
+     * skip first field of each row as well
+     */
+    assignValue(){
+        for (let i = 1; i < this.matrix.length; i++){
+            for (let j = 1; j < this.matrix[0].length; j++){
+                //get values of all three ascended, needed to compute the possible values for current field
+                let topLeftValue = this.matrix[i-1][j-1].final_score;
+                let topValue = this.matrix[i-1][j].final_score;
+                let leftValue = this.matrix[i][j-1].final_score;
+
+                //find out if current field is match or mismatch and assign value based on cost
+                let matchMismatch = this.matrix[i][j].x_value === this.matrix[i][j].y_value ? this.match : this.mismatch;
+
+                // get diagonal score, based on ascending finalValue and match/mismatch cost
+                let topLeftScore = topLeftValue + matchMismatch;
+
+                //get top score, based on ascending finalValue and gap cost
+                let topScore = topValue + this.gap;
+
+                //get left score, based on ascending finalValue and gap cost
+                let leftScore = leftValue + this.gap;
+
+                // set the finalValue of the current field as the best final Score
+                this.matrix[i][j].final_score = this.computeFinalScore(topLeftScore, topScore, leftScore);
+
+                // set the missing values of current field
+                this.matrix[i][j].top_ascender = topValue;
+                this.matrix[i][j].top_left_ascender = topLeftValue;
+                this.matrix[i][j].left_ascender = leftValue;
+                this.matrix[i][j].top_score = topScore;
+                this.matrix[i][j].top_left_score = topLeftScore;
+                this.matrix[i][j].left_score = leftScore;
+            }
+        }
+    }
+
+    /**
+     * find chain beginning with last field and set the field before as next value
+     */
+    linkChain(){
+
+    }
+
+    /**
+     * given the three possible scores, the finalValue of the current field is chosen
+     */
+    computeFinalScore(topLeft, top, left){
+        if (topLeft >= top && topLeft >= left){
+            return topLeft;
+        } else if (top >= left && top >= topLeft){
+            return top;
+        } else if (left >= topLeft && left >= top){
+            return left;
+        }
+    }
 }
 
 let test_matrix = new NeedlemanWunschSimilarity("AATCG", "AACG", 1, -1, -2);
+test_matrix.assignValue();
 console.log(test_matrix.matrix);

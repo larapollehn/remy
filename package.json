@@ -1,0 +1,19 @@
+{
+  "name": "remy",
+  "version": "1.0.0",
+  "description": "DNA aligning algorithms",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/alignment.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larapollehn/remy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/larapollehn/remy/issues"
+  },
+  "homepage": "https://github.com/larapollehn/remy#readme"
+}
