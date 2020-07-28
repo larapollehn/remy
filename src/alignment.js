@@ -23,6 +23,7 @@ class NeedlemanWunschSimilarity {
         this.mismatch = mismatch;
         this.gap = gap;
         this.matrix = [];
+        this.linkedFields = [];
         this.initializeMatrix();
     }
 
@@ -95,7 +96,7 @@ class NeedlemanWunschSimilarity {
                 let leftScore = leftValue + this.gap;
 
                 // set the finalValue of the current field as the best final Score
-                this.matrix[i][j].final_score = this.computeFinalScore(topLeftScore, topScore, leftScore);
+                this.matrix[i][j].final_score = this.findBestValue(topLeftScore, topScore, leftScore);
 
                 // set the missing values of current field
                 this.matrix[i][j].top_ascender = topValue;
@@ -112,13 +113,44 @@ class NeedlemanWunschSimilarity {
      * find chain beginning with last field and set the field before as next value
      */
     linkChain(){
+        // get last field of matrix, down right
+        let start = this.matrix[this.sequence_a.length][this.sequence_b.length];
 
+        let currentField = start;
+        this.linkedFields.push({x: currentField.x_position, y: currentField.y_position});
+        let links = this.sequence_a.length;
+        while (links > 0){
+            let x_coord;
+            let y_coord;
+            if (currentField.x_value === currentField.y_value){
+                // in case of a match go up diagonal-left
+                x_coord = currentField.x_position -1;
+                y_coord = currentField.y_position -1;
+            } else {
+                // in case of a mismatch find biggest ascending value and go there
+                if(currentField.top_ascender >= currentField.top_left_ascender && currentField.top_ascender >= currentField.left_ascender){
+                    x_coord = currentField.x_position;
+                    y_coord = currentField.y_position -1;
+                } else if (currentField.top_left_ascender >= currentField.left_ascender && currentField.top_left_ascender >= currentField.top_ascender){
+                    x_coord = currentField.x_position -1;
+                    y_coord = currentField.y_position -1;
+                } else if (currentField.left_ascender >= currentField.top_ascender && currentField.left_ascender >=currentField.top_left_ascender){
+                    x_coord = currentField.x_position -1;
+                    y_coord = currentField.y_position;
+                }
+            }
+            // set next of currentField and let it be the next currentField
+            currentField.next = this.matrix[y_coord][x_coord];
+            currentField = this.matrix[y_coord][x_coord];
+            this.linkedFields.push({x: currentField.x_position, y: currentField.y_position});
+            links--;
+        }
     }
 
     /**
      * given the three possible scores, the finalValue of the current field is chosen
      */
-    computeFinalScore(topLeft, top, left){
+    findBestValue(topLeft, top, left){
         if (topLeft >= top && topLeft >= left){
             return topLeft;
         } else if (top >= left && top >= topLeft){
@@ -131,4 +163,6 @@ class NeedlemanWunschSimilarity {
 
 let test_matrix = new NeedlemanWunschSimilarity("AATCG", "AACG", 1, -1, -2);
 test_matrix.assignValue();
-console.log(test_matrix.matrix);
+test_matrix.linkChain();
+console.log(test_matrix.linkedFields);
+//console.log(test_matrix.matrix);
