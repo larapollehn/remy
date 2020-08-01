@@ -142,9 +142,10 @@ class NeedlemanWunschSimilarity {
             // set next of currentField and let it be the next currentField
             currentField.next = this.matrix[y_coord][x_coord];
             currentField = this.matrix[y_coord][x_coord];
-            this.linkedFields.push({x: currentField.x_position, y: currentField.y_position});
+            this.linkedFields.push({x: currentField.x_position, y: currentField.y_position, field: currentField});
             links--;
         }
+        this.linkedFields.push({x: 0, y:0, field: this.matrix[0][0]}); // the linked chain always returns to start position 0/0
     }
 
     /**
@@ -161,7 +162,7 @@ class NeedlemanWunschSimilarity {
     }
 }
 
-let test_matrix = new NeedlemanWunschSimilarity("AATCG", "AACG", 1, -1, -2);
+let test_matrix = new NeedlemanWunschSimilarity("ATCCGT", "TATCCG", 1, -1, -2);
 test_matrix.assignValue();
 test_matrix.linkChain();
 console.log(test_matrix.linkedFields);
