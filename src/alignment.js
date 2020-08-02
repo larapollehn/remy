@@ -24,6 +24,7 @@ class NeedlemanWunschSimilarity {
         this.gap = gap;
         this.matrix = [];
         this.linkedFields = [];
+        this.overall_score = null;
         this.initializeMatrix();
     }
 
@@ -107,6 +108,7 @@ class NeedlemanWunschSimilarity {
                 this.matrix[i][j].left_score = leftScore;
             }
         }
+        this.overall_score = this.matrix[this.matrix.length-1][this.matrix[0].length-1].final_score;
     }
 
     /**
@@ -169,6 +171,7 @@ class NeedlemanWunschSimilarity {
         const mismatch = '|';
         const chain = this.linkedFields.reverse();
 
+        // markers that repr. indices
         let a_marker = 0;
         let b_marker = 0;
 
@@ -186,10 +189,10 @@ class NeedlemanWunschSimilarity {
                 result[0] += this.sequence_a[a_marker];
                 result[1] += ' ';
                 result[2] += gap;
-                b_marker--;
+                b_marker--; //decrement index, because current seq value is skipped and marker is incremented after that
             } else if (chain[i].y === chain[i].y) {
                 result[0] += gap;
-                a_marker--;
+                a_marker--; //decrement index, because current seq value is skipped and marker is incremented after that
                 result[1] += ' ';
                 result[2] += this.sequence_b[b_marker];
             }
@@ -200,7 +203,7 @@ class NeedlemanWunschSimilarity {
     }
 }
 
-let test_matrix = new NeedlemanWunschSimilarity("AATCG", "AACG", 1, -1, -2);
+let test_matrix = new NeedlemanWunschSimilarity("ATCCTC", "AACG", 1, -1, -2);
 test_matrix.assignValue();
 test_matrix.linkChain();
 console.log(test_matrix.linkedFields);
