@@ -4,7 +4,7 @@
   "description": "DNA aligning algorithms",
   "main": "index.js",
   "scripts": {
-    "start": "node src/alignment.js"
+    "start": "ts-node main.ts"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/larapollehn/remy/issues"
   },
-  "homepage": "https://github.com/larapollehn/remy#readme"
+  "homepage": "https://github.com/larapollehn/remy#readme",
+  "dependencies": {
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
+  }
 }
