@@ -16,7 +16,6 @@ export default class SimpleTextProducer extends TextProducer {
         const match = '*';
         const mismatch = '|';
         const chain = path.reverse();
-        console.log("chain", chain);
 
         // markers that repr. indices
         let a_marker = 0;
