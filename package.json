@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/larapollehn/remy#readme",
   "dependencies": {
+    "@types/jest": "^26.0.8",
+    "jest": "^26.2.2",
+    "ts-jest": "^26.1.4",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
   }
