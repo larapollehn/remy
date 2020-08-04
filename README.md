@@ -14,7 +14,12 @@ Aligned sequences of nucleotide or amino acid residues are typically represented
 between the residues so that identical or similar characters are aligned in successive columns. Sequence alignments are also used 
 for non-biological sequences, such as calculating the distance cost between strings in a natural language or in financial data.
 
-![](images/dotplot.png)
+<table border="1" width="100%">
+    <tr>
+        <td><img src="images/dotplot.png" width="200"></td>
+        <td><img src="images/dna-repeats.jpg" width="200"></td>
+    </tr>
+</table>
 
 # Needleman-Wunsch
 
