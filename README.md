@@ -6,6 +6,8 @@ The DNA are the fundamental building blocks of a living cell and are made up of 
 
 There are four kinds of nucleotide, each differentianted from each other by its Nucleobase `guanine`, `adenine`, `cytosine` and `thymine`.
 
+![](images/nucluein.png)
+
 # Needleman-Wunsch
 
 Saul B. Needleman and Christian D. Wunsch introduced 1970 an approach to compute the optimal global alignment of two sequences for comparing two nucleotide or amino acid sequences.
