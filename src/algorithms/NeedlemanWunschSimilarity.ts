@@ -24,6 +24,11 @@ export default class NeedlemanWunschSimilarity extends AligningAlgorithm {
      */
     constructor(sequence_a: string, sequence_b: string, match: number, mismatch: number, gap: number) {
         super(sequence_a, sequence_b, match, mismatch, gap);
+        this.sequence_a = sequence_a;
+        this.sequence_b = sequence_b;
+        this.match = match;
+        this.mismatch = mismatch;
+        this.gap = gap;
         this.matrix = [];
 
         // initialize the value-empty matrix with cells

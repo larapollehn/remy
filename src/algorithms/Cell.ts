@@ -9,7 +9,7 @@ export default class Cell {
     top_ascender: Cell = null;
     left_ascender: Cell = null;
     top_left_ascender: Cell = null;
-    final_score = null;
+    final_score: number = null;
 
     /**
      * Constructor

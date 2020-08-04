@@ -6,7 +6,8 @@
     "strict": true,
     "declaration": true,
     "outDir": "dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "strictNullChecks": false
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
