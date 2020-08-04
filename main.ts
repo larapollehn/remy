@@ -8,6 +8,8 @@ let needleManWunsch : AligningAlgorithm = new NeedlemanWunschSimilarity("ATCCTC"
 let textProducer: TextProducer = new SimpleTextProducer(needleManWunsch);
 const texts = textProducer.produceText();
 
+console.log(needleManWunsch.matrix[0][0]);
+
 for(let i = 0; i < texts.length; i++){
     console.log(texts[i]);
 }
