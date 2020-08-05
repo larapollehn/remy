@@ -115,7 +115,8 @@ export default class NeedlemanWunschSimilarity extends AligningAlgorithm {
 
     align(): Cell[][] {
         const result = [];
-        const aligningQueue = [[this.matrix[this.sequence_a.length][this.sequence_b.length]]];
+        const initialChain = [this.matrix[this.sequence_a.length][this.sequence_b.length]]
+        const aligningQueue = [initialChain];
 
         while (aligningQueue.length !== 0) {
             const currentChain = aligningQueue[0];
@@ -132,7 +133,6 @@ export default class NeedlemanWunschSimilarity extends AligningAlgorithm {
             }
             aligningQueue.shift();
         }
-
         return result;
     }
 }

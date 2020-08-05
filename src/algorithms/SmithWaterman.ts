@@ -8,6 +8,7 @@ export default class SmithWaterman extends AligningAlgorithm {
     match: number;
     mismatch: number;
     gap: number;
+    topScore: number = 0;
     matrix: Cell[][]
 
     /**
@@ -58,7 +59,6 @@ export default class SmithWaterman extends AligningAlgorithm {
         for (let i = 0; i < this.matrix.length; i++) {
             if (i !== 0) {
                 this.matrix[i][0].final_score = (this.gap * i) < 0 ? 0 : (this.gap * i);
-                ;
             }
         }
 
@@ -92,12 +92,30 @@ export default class SmithWaterman extends AligningAlgorithm {
                 const bestValue = findBestOverZero(topLeftScore, topScore, leftScore);
                 this.matrix[y][x].final_score = bestValue;
 
+                // set the global topScore value
+                if (bestValue > this.topScore) {
+                    this.topScore = bestValue;
+                }
+
                 // set the missing values of current field
-                if (bestValue <= 0) {
+                if (bestValue > 0){
+                    if (topScore === bestValue) {
+                        this.matrix[y][x].top_ascender = this.matrix[y - 1][x];
+                    }
+                    if (topLeftScore === bestValue) {
+                        this.matrix[y][x].top_left_ascender = this.matrix[y - 1][x - 1];
+                    }
+                    if (leftScore === bestValue) {
+                        this.matrix[y][x].left_ascender = this.matrix[y][x - 1];
+                    }
+                } else if (bestValue <= 0){
                     this.matrix[y][x].top_ascender = this.matrix[y - 1][x];
                     this.matrix[y][x].top_left_ascender = this.matrix[y - 1][x - 1];
                     this.matrix[y][x].left_ascender = this.matrix[y][x - 1];
                 }
+
+
+
 
                 this.matrix[y][x].top_score = topScore;
                 this.matrix[y][x].top_left_score = topLeftScore;
@@ -106,7 +124,39 @@ export default class SmithWaterman extends AligningAlgorithm {
         }
     }
 
+
     align(): Cell[][] {
-        return [];
+
+        //find all the start nodes, which have the topScore as a finalValue
+        const aligningQueue: Cell[][] = [];
+        for (let i = 0; i <= this.sequence_a.length; i++) {
+            for (let j = 0; j <= this.sequence_b.length; j++) {
+                if (this.matrix[i][j].final_score === this.topScore) {
+                    aligningQueue.push([this.matrix[i][j]]);
+                }
+            }
+        }
+
+        const result = [];
+        while (aligningQueue.length !== 0) {
+            const currentChain = aligningQueue[0];
+
+            const lastCellOfChain = currentChain[currentChain.length - 1];
+            const lastElementAscenders = lastCellOfChain.getAllAscenders();
+
+            if (lastElementAscenders.length > 0) {
+                for (let i = 0; i < lastElementAscenders.length; i++) {
+                    if (lastElementAscenders[i].final_score !== 0) {
+                        const newUnfinishedChain = copyArray<Cell>(currentChain);
+                        newUnfinishedChain.push(lastElementAscenders[i]);
+                        aligningQueue.push(newUnfinishedChain);
+                    } else {
+                        result.push(currentChain);
+                    }
+                }
+            }
+            aligningQueue.shift();
+        }
+        return result;
     }
 }
