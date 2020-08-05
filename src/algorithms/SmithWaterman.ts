@@ -114,9 +114,6 @@ export default class SmithWaterman extends AligningAlgorithm {
                     this.matrix[y][x].left_ascender = this.matrix[y][x - 1];
                 }
 
-
-
-
                 this.matrix[y][x].top_score = topScore;
                 this.matrix[y][x].top_left_score = topLeftScore;
                 this.matrix[y][x].left_score = leftScore;
@@ -151,6 +148,7 @@ export default class SmithWaterman extends AligningAlgorithm {
                         newUnfinishedChain.push(lastElementAscenders[i]);
                         aligningQueue.push(newUnfinishedChain);
                     } else {
+                        currentChain.push(lastElementAscenders[i]);
                         result.push(currentChain);
                     }
                 }

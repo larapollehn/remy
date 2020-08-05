@@ -27,4 +27,11 @@ for(let i = 0; i < distanceTexts.length; i++){
  **/
 
 const smithWaterman: AligningAlgorithm = new SmithWaterman("AATAC", "AACG",1, -1, -2);
-console.log(smithWaterman.align())
+const paths = smithWaterman.align();
+
+for (let i = 0; i < paths.length; i++){
+    for (let j = 0; j < paths[i].length; j++){
+        console.log(`${paths[i][j].x_position} | ${paths[i][j].y_position}`);
+    }
+    console.log('#####');
+}
