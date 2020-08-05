@@ -1,6 +1,6 @@
 import NeedlemanWunschSimilarity from "../src/algorithms/NeedlemanWunschSimilarity";
 
-test("filled Matrix is correct", () => {
+test("filled Matrix is correct for NeedelmanWunschSimilarity", () => {
     const needlemanWunsch = new NeedlemanWunschSimilarity("AATCG", "AACG", 1, -1, -2);
 
     expect(needlemanWunsch.matrix[0][0].final_score).toBe(0); // check start-node
