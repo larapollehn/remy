@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/larapollehn/remy.svg?token=XA6Ut1BA6qs5Z8RuPjz2&branch=master)](https://travis-ci.com/larapollehn/remy)
+
 # DNA alignment visualization
 
 Visualization of algorithms for nucleotide alignment.
@@ -34,19 +36,40 @@ optimizes the similarity measure.
 
 ## Usages
 
-Needleman-Wunsch Distance
+Needleman-Wunsch similarity
 
 ```typescript
 import NeedlemanWunschSimilarity from "./src/algorithms/NeedlemanWunschSimilarity";
-import AligningAlgorithm from "./src/algorithms/AligningAlgorithm";
-import TextProducer from "./src/text/TextProducer";
 import SimpleTextProducer from "./src/text/SimpleTextProducer";
-import NeedlemanWunschDistance from "./src/algorithms/NeedlemanWunschDistance";
 
-
-const similarity : AligningAlgorithm = new NeedlemanWunschSimilarity("ATCCTC", "AACG", 1, -1, -2);
-const distance: AligningAlgorithm = new NeedlemanWunschDistance("ATCCTC", "AACG", -1, 1, 2)
-
-const similarityTextProducer: TextProducer = new SimpleTextProducer(similarity);
+const similarity  = new NeedlemanWunschSimilarity("ATCCTC", "AACG", 1, -1, -2);
+const similarityTextProducer = new SimpleTextProducer(similarity);
 const similarityTexts = similarityTextProducer.produceText();
+console.log(similarityTexts);
+```
+
+Needleman-Wunsch distance
+
+```typescript
+
+import NeedlemanWunschDistance from "./src/algorithms/NeedlemanWunschDistance";
+import SimpleTextProducer from "./src/text/SimpleTextProducer";
+
+const distance  = new NeedlemanWunschDistance("ATCCTC", "AACG", 1, -1, -2);
+const distanceTextProducer = new SimpleTextProducer(distance);
+const distanceTexts = distanceTextProducer.produceText();
+console.log(distanceTexts);
+```
+
+Smith-Waterman 
+
+```typescript
+import SmithWaterman from "./src/algorithms/SmithWaterman";
+import SimpleTextProducer from "./src/text/SimpleTextProducer";
+
+
+const smithWaterman = new SmithWaterman("ATCGAAT", "AACGTA",1, -1, -2);
+const smithWatermanTextProducer = new SimpleTextProducer(smithWaterman);
+const smithWatermanTexts = smithWatermanTextProducer.produceText();
+console.log(smithWatermanTexts);
 ```
