@@ -2,14 +2,22 @@ import NeedlemanWunschSimilarity from "./src/algorithms/NeedlemanWunschSimilarit
 import AligningAlgorithm from "./src/algorithms/AligningAlgorithm";
 import TextProducer from "./src/text/TextProducer";
 import SimpleTextProducer from "./src/text/SimpleTextProducer";
+import NeedlemanWunschDistance from "./src/algorithms/NeedlemanWunschDistance";
 
 
-let needleManWunsch : AligningAlgorithm = new NeedlemanWunschSimilarity("ATCCTC", "AACG", 1, -1, -2);
-let textProducer: TextProducer = new SimpleTextProducer(needleManWunsch);
-const texts = textProducer.produceText();
+const similarity : AligningAlgorithm = new NeedlemanWunschSimilarity("ATCCTC", "AACG", 1, -1, -2);
+const distance: AligningAlgorithm = new NeedlemanWunschDistance("ATCCTC", "AACG", -1, 1, 2)
+const similarityTextProducer: TextProducer = new SimpleTextProducer(similarity);
+const similarityTexts = similarityTextProducer.produceText();
+const distanceTextProducer: TextProducer = new SimpleTextProducer(distance);
+const distanceTexts = distanceTextProducer.produceText();
 
-console.log(needleManWunsch.matrix[0][0]);
+for(let i = 0; i < similarityTexts.length; i++){
+    console.log(similarityTexts[i]);
+}
 
-for(let i = 0; i < texts.length; i++){
-    console.log(texts[i]);
+console.log("###########################");
+
+for(let i = 0; i < distanceTexts.length; i++){
+    console.log(distanceTexts[i]);
 }

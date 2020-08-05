@@ -1,12 +1,12 @@
 import Cell from "./Cell";
-import {copyArray, findHighestValue} from "../Utils";
-import AligningAlgorithm from "./AligningAlgorithm";
+import {findLowestValue} from "../Utils";
+import NeedlemanWunschSimilarity from "./NeedlemanWunschSimilarity";
 
 
 /**
  * Needleman-Wunsch similarity algorithm. Looking for maximal score of top, left or top left previous nodes.
  */
-export default class NeedlemanWunschSimilarity extends AligningAlgorithm {
+export default class NeedlemanWunschDistance extends NeedlemanWunschSimilarity {
     sequence_a: string;
     sequence_b: string;
     match: number;
@@ -92,17 +92,17 @@ export default class NeedlemanWunschSimilarity extends AligningAlgorithm {
                 let leftScore = leftValue + this.gap;
 
                 // set the finalValue of the current field as the best final Score
-                const bestValue = findHighestValue(topLeftScore, topScore, leftScore);
+                const bestValue = findLowestValue(topLeftScore, topScore, leftScore);
                 this.matrix[y][x].final_score = bestValue;
 
                 // set the missing values of current field
-                if (topScore >= bestValue) {
+                if (topScore <= bestValue) {
                     this.matrix[y][x].top_ascender = this.matrix[y - 1][x];
                 }
-                if (topLeftScore >= bestValue) {
+                if (topLeftScore <= bestValue) {
                     this.matrix[y][x].top_left_ascender = this.matrix[y - 1][x - 1];
                 }
-                if (leftScore >= bestValue) {
+                if (leftScore <= bestValue) {
                     this.matrix[y][x].left_ascender = this.matrix[y][x - 1];
                 }
 
@@ -111,28 +111,5 @@ export default class NeedlemanWunschSimilarity extends AligningAlgorithm {
                 this.matrix[y][x].left_score = leftScore;
             }
         }
-    }
-
-    align(): Cell[][] {
-        const result = [];
-        const aligningQueue = [[this.matrix[this.sequence_a.length][this.sequence_b.length]]];
-
-        while (aligningQueue.length !== 0) {
-            const currentChain = aligningQueue[0];
-            const lastCellOfChain = currentChain[currentChain.length - 1];
-            const lastElementAscenders = lastCellOfChain.getAllAscenders();
-            if (lastElementAscenders.length > 0) {
-                for (let i = 0; i < lastElementAscenders.length; i++) {
-                    const newUnfinishedChain = copyArray<Cell>(currentChain);
-                    newUnfinishedChain.push(lastElementAscenders[i]);
-                    aligningQueue.push(newUnfinishedChain);
-                }
-            } else {
-                result.push(currentChain);
-            }
-            aligningQueue.shift();
-        }
-
-        return result;
     }
 }
