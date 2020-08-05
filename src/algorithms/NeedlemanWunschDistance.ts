@@ -34,7 +34,7 @@ export default class NeedlemanWunschDistance extends NeedlemanWunschSimilarity {
         // initialize the value-empty matrix with cells
         // this.sequence[...-1] because at 0/0 the matrix has null as x/y-values
         for (let y = 0; y <= this.sequence_a.length; y++) {
-            let row = [];
+            const row = [];
             for (let x = 0; x <= this.sequence_b.length; x++) {
                 if (y === 0 && x === 0) {
                     row.push(new Cell(x, y, null, null));
@@ -75,21 +75,21 @@ export default class NeedlemanWunschDistance extends NeedlemanWunschSimilarity {
         for (let y = 1; y < this.matrix.length; y++) {
             for (let x = 1; x < this.matrix[0].length; x++) {
                 //get values of all three ascended, needed to compute the possible values for current field
-                let topLeftValue = this.matrix[y - 1][x - 1].final_score;
-                let topValue = this.matrix[y - 1][x].final_score;
-                let leftValue = this.matrix[y][x - 1].final_score;
+                const topLeftValue = this.matrix[y - 1][x - 1].final_score;
+                const topValue = this.matrix[y - 1][x].final_score;
+                const leftValue = this.matrix[y][x - 1].final_score;
 
                 //find out if current field is match or mismatch and assign value based on cost
-                let matchMismatchScore = this.matrix[y][x].x_value === this.matrix[y][x].y_value ? this.match : this.mismatch;
+                const matchMismatchScore = this.matrix[y][x].x_value === this.matrix[y][x].y_value ? this.match : this.mismatch;
 
                 // get diagonal score, based on ascending finalValue and match/mismatch cost
-                let topLeftScore = topLeftValue + matchMismatchScore;
+                const topLeftScore = topLeftValue + matchMismatchScore;
 
                 //get top score, based on ascending finalValue and gap cost
-                let topScore = topValue + this.gap;
+                const topScore = topValue + this.gap;
 
                 //get left score, based on ascending finalValue and gap cost
-                let leftScore = leftValue + this.gap;
+                const leftScore = leftValue + this.gap;
 
                 // set the finalValue of the current field as the best final Score
                 const bestValue = findLowestValue(topLeftScore, topScore, leftScore);

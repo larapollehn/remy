@@ -12,7 +12,7 @@ export function findBestOverZero(a: number, b: number, c: number) {
 }
 
 export function copyArray<T>(ts: T[]): T[] {
-    let ret = [];
+    const ret = [];
     for (let i = 0; i < ts.length; i++) {
         ret.push(ts[i]);
     }
