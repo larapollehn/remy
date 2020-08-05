@@ -34,13 +34,19 @@ export default abstract class AligningAlgorithm {
      */
     abstract align() : Cell[][];
 
+    /**
+     * prints the matrix in the console
+     *
+     */
     print(): void{
         let result = '';
         for(let i = 0; i <= this.sequence_b.length +1; i++){
-            if(i === 0 || i === 1){
-                result += "  ";
+            if(i === 0){
+                result += " ";
+            } else if(i === 1) {
+               result += "     "
             } else {
-                result += ` ${this.sequence_b[i-2]} `
+                result += `   ${this.sequence_b[i-2]} `
             }
         }
         result += "\n";
@@ -51,7 +57,13 @@ export default abstract class AligningAlgorithm {
                 result += `${this.sequence_a[i-1]}`
             }
             for(let j = 0; j <= this.sequence_b.length; j++){
-                result += ` ${this.matrix[i][j].final_score} `;
+                if(String(this.matrix[i][j].final_score).length === 1){
+                    result += `   ${this.matrix[i][j].final_score} `;
+                } else if(String(this.matrix[i][j].final_score).length === 2){
+                    result += `  ${this.matrix[i][j].final_score} `;
+                } else if (String(this.matrix[i][j].final_score).length === 3){
+                    result += ` ${this.matrix[i][j].final_score} `;
+                }
             }
             result += '\n';
         }

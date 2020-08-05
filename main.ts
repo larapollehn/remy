@@ -8,6 +8,7 @@ import SmithWaterman from "./src/algorithms/SmithWaterman";
 
 const similarity : AligningAlgorithm = new NeedlemanWunschSimilarity("ATCCTC", "AACG", 1, -1, -2);
 const distance: AligningAlgorithm = new NeedlemanWunschDistance("ATCCTC", "AACG", -1, 1, 2)
+similarity.print();
 
 const similarityTextProducer: TextProducer = new SimpleTextProducer(similarity);
 const similarityTexts = similarityTextProducer.produceText();
