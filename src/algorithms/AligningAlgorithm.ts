@@ -33,4 +33,28 @@ export default abstract class AligningAlgorithm {
      * A 2D list, in which each list is a best result.
      */
     abstract align() : Cell[][];
+
+    print(): void{
+        let result = '';
+        for(let i = 0; i <= this.sequence_b.length +1; i++){
+            if(i === 0 || i === 1){
+                result += "  ";
+            } else {
+                result += ` ${this.sequence_b[i-2]} `
+            }
+        }
+        result += "\n";
+        for (let i = 0; i <= this.sequence_a.length; i++){
+            if(i === 0){
+                result += " ";
+            } else {
+                result += `${this.sequence_a[i-1]}`
+            }
+            for(let j = 0; j <= this.sequence_b.length; j++){
+                result += ` ${this.matrix[i][j].final_score} `;
+            }
+            result += '\n';
+        }
+        console.log(result);
+    }
 }

@@ -57,7 +57,8 @@ export default class SmithWaterman extends AligningAlgorithm {
         //fill each first Cell of the rows based on linear growing gap value
         for (let i = 0; i < this.matrix.length; i++) {
             if (i !== 0) {
-                this.matrix[i][0].final_score = (this.gap * i) < 0 ? 0 : (this.gap * i);;
+                this.matrix[i][0].final_score = (this.gap * i) < 0 ? 0 : (this.gap * i);
+                ;
             }
         }
 
@@ -92,13 +93,9 @@ export default class SmithWaterman extends AligningAlgorithm {
                 this.matrix[y][x].final_score = bestValue;
 
                 // set the missing values of current field
-                if (topScore >= bestValue) {
+                if (bestValue <= 0) {
                     this.matrix[y][x].top_ascender = this.matrix[y - 1][x];
-                }
-                if (topLeftScore >= bestValue) {
                     this.matrix[y][x].top_left_ascender = this.matrix[y - 1][x - 1];
-                }
-                if (leftScore >= bestValue) {
                     this.matrix[y][x].left_ascender = this.matrix[y][x - 1];
                 }
 
