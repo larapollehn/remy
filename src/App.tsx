@@ -1,11 +1,11 @@
 import React from 'react';
 
-import MatrixVisualizer from "./components/MatrixVisualizer";
+import Settings from "./components/Settings";
 
 function App() {
   return (
     <div className="App">
-      <MatrixVisualizer/>
+      <Settings/>
     </div>
   );
 }

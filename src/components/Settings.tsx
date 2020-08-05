@@ -1,8 +1,11 @@
 import React, {useState} from "react";
 
-const MatrixVisualizer = () => {
+import Matrix from "./Matrix";
+
+const Settings = () => {
     const algorithms = ["NeedelemanWunschSimilarity", "NeedlemanWunschDistance", "SmithWaterman"];
     const [values, setValues] = useState({
+            algorithm: "NeedelemanWunschSimilarity",
             seqA: 'GATACA',
             seqB: "TACAGA",
             matchScore: 1,
@@ -10,7 +13,7 @@ const MatrixVisualizer = () => {
             gapScore: 2
     });
 
-    const {seqA, seqB, matchScore, mismatchScore, gapScore} = values;
+    const {algorithm, seqA, seqB, matchScore, mismatchScore, gapScore} = values;
 
     const handleInputChange = (target: string) => (event: any) => {
         setValues({...values, [target]: event.target.value})
@@ -19,7 +22,7 @@ const MatrixVisualizer = () => {
     return (
         <div>
             <h3>Settings</h3>
-            <select>
+            <select onChange={handleInputChange("algorithm")}>
                 {
                     algorithms.map((algorithm, i) => (
                         <option key={i} value={algorithm}>{algorithm}</option>
@@ -30,7 +33,6 @@ const MatrixVisualizer = () => {
             <input id="seqA" type="text" value={seqA} onChange={handleInputChange("seqA")}/>
             <label>Sequence A</label>
             <br/>
-
             <input id="seqB" type="text" value={seqB} onChange={handleInputChange("seqB")}/>
             <label>Sequence B</label>
             <br/>
@@ -42,19 +44,12 @@ const MatrixVisualizer = () => {
             <br/>
             <input id="gapScore" type="number" value={gapScore} onChange={handleInputChange("gapScore")}/>
             <label>Gap</label>
+            <br/>
 
-            <br/>
-            {seqA}
-            <br/>
-            {seqB}
-            <br/>
-            {matchScore}
-            <br/>
-            {mismatchScore}
-            <br/>
-            {gapScore}
+            <Matrix algorithm={algorithm} seqA={seqA} seqB={seqB} matchScore={matchScore} mismatchScore={mismatchScore} gapScore={gapScore}/>
+
         </div>
     )
 }
 
-export default MatrixVisualizer;
+export default Settings;
