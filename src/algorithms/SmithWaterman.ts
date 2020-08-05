@@ -1,6 +1,6 @@
 import AligningAlgorithm from "./AligningAlgorithm";
 import Cell from "./Cell";
-import {copyArray, findHighestValue} from "../Utils";
+import {copyArray, findBestOverZero, findHighestValue} from "../Utils";
 
 export default class SmithWaterman extends AligningAlgorithm {
     sequence_a: string;
@@ -88,7 +88,7 @@ export default class SmithWaterman extends AligningAlgorithm {
                 let leftScore = leftValue + this.gap;
 
                 // set the finalValue of the current field as the best final Score
-                const bestValue = findHighestValue(topLeftScore, topScore, leftScore);
+                const bestValue = findBestOverZero(topLeftScore, topScore, leftScore);
                 this.matrix[y][x].final_score = bestValue;
 
                 // set the missing values of current field

@@ -96,13 +96,13 @@ export default class NeedlemanWunschDistance extends NeedlemanWunschSimilarity {
                 this.matrix[y][x].final_score = bestValue;
 
                 // set the missing values of current field
-                if (topScore <= bestValue) {
+                if (topScore === bestValue) {
                     this.matrix[y][x].top_ascender = this.matrix[y - 1][x];
                 }
-                if (topLeftScore <= bestValue) {
+                if (topLeftScore === bestValue) {
                     this.matrix[y][x].top_left_ascender = this.matrix[y - 1][x - 1];
                 }
-                if (leftScore <= bestValue) {
+                if (leftScore === bestValue) {
                     this.matrix[y][x].left_ascender = this.matrix[y][x - 1];
                 }
 
