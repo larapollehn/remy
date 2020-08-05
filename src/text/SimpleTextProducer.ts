@@ -29,10 +29,10 @@ export default class SimpleTextProducer extends TextProducer {
                 } else {
                     result[1] += mismatch;
                 }
-                result[0] += this.aligningAlgorithm.sequence_a[a_marker];
-                result[2] += this.aligningAlgorithm.sequence_b[b_marker];
+                result[0] += chain[i].x_value;
+                result[2] += chain[i].y_value;
             } else if (chain[i].x_position === chain[i + 1].x_position) {
-                result[0] += this.aligningAlgorithm.sequence_a[a_marker];
+                result[0] += chain[i].x_value;
                 result[1] += ' ';
                 result[2] += gap;
                 b_marker--; //decrement index, because current seq value is skipped and marker is incremented after that
@@ -40,7 +40,7 @@ export default class SimpleTextProducer extends TextProducer {
                 result[0] += gap;
                 a_marker--; //decrement index, because current seq value is skipped and marker is incremented after that
                 result[1] += ' ';
-                result[2] += this.aligningAlgorithm.sequence_b[b_marker];
+                result[2] += chain[i].y_value;
             }
             a_marker++;
             b_marker++;
