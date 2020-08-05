@@ -20,7 +20,7 @@ export default class SimpleTextProducer extends TextProducer {
         let result = ['', '', '']; // result shows both sequences and the visual rep of their match/mismatch/gap
         for (let i = 0; i < chain.length - 1; i++) {
             if (chain[i].x_position + 1 === chain[i + 1].x_position && chain[i].y_position + 1 === chain[i + 1].y_position) {
-                if (this.aligningAlgorithm.sequence_a[i] === this.aligningAlgorithm.sequence_b[i]) {
+                if (chain[i+1].y_value === chain[i+1].x_value) {
                     result[1] += match;
                 } else {
                     result[1] += mismatch;

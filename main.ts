@@ -13,12 +13,11 @@ const similarityTextProducer: TextProducer = new SimpleTextProducer(similarity);
 const similarityTexts = similarityTextProducer.produceText();
 const distanceTextProducer: TextProducer = new SimpleTextProducer(distance);
 const distanceTexts = distanceTextProducer.produceText();
-
+/**
 for(let i = 0; i < similarityTexts.length; i++){
     console.log(similarityTexts[i]);
 }
 
-/**
 console.log("###########################");
 
 for(let i = 0; i < distanceTexts.length; i++){
@@ -26,7 +25,7 @@ for(let i = 0; i < distanceTexts.length; i++){
 }
  **/
 
-const smithWaterman: AligningAlgorithm = new SmithWaterman("AATAC", "AACG",1, -1, -2);
+const smithWaterman: AligningAlgorithm = new SmithWaterman("ATCGAAT", "AACGTA",1, -1, -2);
 const paths = smithWaterman.align();
 
 /**
@@ -37,3 +36,11 @@ for (let i = 0; i < paths.length; i++){
     console.log('#####');
 }
  **/
+
+const smithWatermanTextProducer: TextProducer = new SimpleTextProducer(smithWaterman);
+const smithWatermanTexts = smithWatermanTextProducer.produceText();
+
+ for(let i = 0; i < smithWatermanTexts.length; i++){
+    console.log(smithWatermanTexts[i]);
+}
+
