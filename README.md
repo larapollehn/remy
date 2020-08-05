@@ -21,7 +21,32 @@ for non-biological sequences, such as calculating the distance cost between stri
     </tr>
 </table>
 
-# Needleman-Wunsch
+## Needleman-Wunsch
 
 Saul B. Needleman and Christian D. Wunsch introduced 1970 an approach to compute the optimal global alignment of two sequences for comparing 
 two nucleotide or amino acid sequences.
+
+## Smith Waterman
+
+The Smith–Waterman algorithm performs local sequence alignment; that is, for determining similar regions between two strings of nucleic acid 
+sequences or protein sequences. Instead of looking at the entire sequence, the Smith–Waterman algorithm compares segments of all possible lengths and 
+optimizes the similarity measure.
+
+## Usages
+
+Needleman-Wunsch Distance
+
+```typescript
+import NeedlemanWunschSimilarity from "./src/algorithms/NeedlemanWunschSimilarity";
+import AligningAlgorithm from "./src/algorithms/AligningAlgorithm";
+import TextProducer from "./src/text/TextProducer";
+import SimpleTextProducer from "./src/text/SimpleTextProducer";
+import NeedlemanWunschDistance from "./src/algorithms/NeedlemanWunschDistance";
+
+
+const similarity : AligningAlgorithm = new NeedlemanWunschSimilarity("ATCCTC", "AACG", 1, -1, -2);
+const distance: AligningAlgorithm = new NeedlemanWunschDistance("ATCCTC", "AACG", -1, 1, 2)
+
+const similarityTextProducer: TextProducer = new SimpleTextProducer(similarity);
+const similarityTexts = similarityTextProducer.produceText();
+```

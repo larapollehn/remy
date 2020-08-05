@@ -21,10 +21,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest tests/*.ts",
+    "test-react": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src/**/**.ts",
-    "fix": "eslint --fix ./src/**/**.ts"
+    "lint": "eslint ./src/**/**.ts ./tests/**/**.ts",
+    "fix": "eslint --fix ./src/**/**.ts ./tests/**/**.ts"
   },
   "eslintConfig": {
     "extends": "react-app"
