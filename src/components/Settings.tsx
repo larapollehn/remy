@@ -16,7 +16,12 @@ const Settings = () => {
     const {algorithm, seqA, seqB, matchScore, mismatchScore, gapScore} = values;
 
     const handleInputChange = (target: string) => (event: any) => {
-        setValues({...values, [target]: event.target.value})
+        if (target === "seqA" || target === "seqB"){
+            setValues({...values, [target]: event.target.value})
+        } else {
+            setValues({...values, [target]: Number(event.target.value)})
+        }
+
     }
 
     return (
@@ -45,6 +50,7 @@ const Settings = () => {
             <input id="gapScore" type="number" value={gapScore} onChange={handleInputChange("gapScore")}/>
             <label>Gap</label>
             <br/>
+            {seqA}
 
             <Matrix algorithm={algorithm} seqA={seqA} seqB={seqB} matchScore={matchScore} mismatchScore={mismatchScore} gapScore={gapScore}/>
 

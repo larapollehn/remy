@@ -1,4 +1,8 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import NeedlemanWunschSimilarity from "../algorithms/NeedlemanWunschSimilarity";
+import NeedlemanWunschDistance from "../algorithms/NeedlemanWunschDistance";
+import SmithWaterman from "../algorithms/SmithWaterman";
+import Cell from "../algorithms/Cell";
 
 interface Props {
     algorithm: string,
@@ -10,11 +14,36 @@ interface Props {
 }
 
 const Matrix = (props: Props) => {
+    const {algorithm, seqA, seqB, matchScore, mismatchScore, gapScore} = props;
+    const [matrix, setMatrix] = useState([]);
 
+    const createMatrix = () => {
+        console.log(seqA, seqB, matchScore, mismatchScore, gapScore);
+        if (algorithm === "NeedelemanWunschSimilarity") {
+            const needlemanWunschSimilarity = new NeedlemanWunschSimilarity(seqA, seqB, matchScore, mismatchScore, gapScore);
+            setMatrix(needlemanWunschSimilarity.matrix);
+        } else if (algorithm === "NeedlemanWunschDistance") {
+            const needlemanWunschDistance = new NeedlemanWunschDistance(seqA, seqB, matchScore, mismatchScore, gapScore);
+            setMatrix(needlemanWunschDistance.matrix);
+        } else if (algorithm === "SmithWaterman") {
+            const smithWaterman = new SmithWaterman(seqA, seqB, matchScore, mismatchScore, gapScore);
+            setMatrix(smithWaterman.matrix);
+        }
+        console.log(matrix);
+    }
+
+    useEffect(() => {
+        createMatrix()
+    }, [algorithm, matchScore, mismatchScore, gapScore])
 
     return (
         <div>
-            <h2>{props.algorithm}</h2>
+            <h2>{algorithm}</h2>
+            {matrix.map((elem) => (
+                elem.map((cell: Cell, i: number) => (
+                    <p key={i}>{cell.final_score}</p>
+                ))
+            ))}
         </div>
     )
 }
