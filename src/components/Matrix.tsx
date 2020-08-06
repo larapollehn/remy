@@ -28,7 +28,6 @@ const Matrix = (props: Props) => {
     set matrix and path(s) as state
      */
     const setupMatrix = () => {
-        console.log(seqA, seqB, matchScore, mismatchScore, gapScore);
         if (algorithm === "NeedelemanWunschSimilarity") {
             const needlemanWunschSimilarity = new NeedlemanWunschSimilarity(seqA, seqB, matchScore, mismatchScore, gapScore);
             const similarityTextProducer = new SimpleTextProducer(needlemanWunschSimilarity);
@@ -53,6 +52,7 @@ const Matrix = (props: Props) => {
     // every time a change happens to one of the parameters, the matrix and texts should be generated again
     useEffect(() => {
         setupMatrix();
+        console.log(paths);
     }, [algorithm, seqA, seqB, matchScore, mismatchScore, gapScore])
 
     return (
@@ -82,6 +82,22 @@ const Matrix = (props: Props) => {
                     ))}
                 </ul>
             ))}
+            {paths.length > 1 && (
+                paths.map((path, i) => (
+                    <ul key={i}>
+                        {path.map((node:Cell, j:number) => (
+                            <li key={j}>{node.x_position}/{node.y_position}</li>
+                        ))}
+                    </ul>
+                ))
+            )}
+            {paths.length === 1 && (
+                <ul >
+                    {paths[0].map((node:Cell, j:number) => (
+                        <li key={j}>{node.x_position}/{node.y_position}</li>
+                    ))}
+                </ul>
+            )}
         </div>
     )
 }
