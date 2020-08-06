@@ -39,11 +39,16 @@ const Matrix = (props: Props) => {
     return (
         <div>
             <h2>{algorithm}</h2>
-            {matrix.map((elem) => (
-                elem.map((cell: Cell, i: number) => (
-                    <p key={i}>{cell.final_score}</p>
-                ))
-            ))}
+            <table>
+                {matrix.map((elem) => (
+                    <tr>
+                        {elem.map((cell: Cell, i: number) => (
+                            <th key={i}>{cell.final_score}</th>
+                        ))}
+                    </tr>
+                ))}
+            </table>
+
         </div>
     )
 }

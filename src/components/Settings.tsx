@@ -16,7 +16,7 @@ const Settings = () => {
     const {algorithm, seqA, seqB, matchScore, mismatchScore, gapScore} = values;
 
     const handleInputChange = (target: string) => (event: any) => {
-        if (target === "seqA" || target === "seqB"){
+        if (target === "seqA" || target === "seqB" || target === "algorithm"){
             setValues({...values, [target]: event.target.value})
         } else {
             setValues({...values, [target]: Number(event.target.value)})
