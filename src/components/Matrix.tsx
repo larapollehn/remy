@@ -50,14 +50,19 @@ const Matrix = (props: Props) => {
         }
     }
 
-    const visualizePath = (index: number) => (event: any) => {
+    const visualizePath = (index: number) => async (event: any) => {
         const chosenPath: Cell[] = paths[index];
         decolorCells();
         //color the cells belonging to the clicked path
-        for (let i = 0; i < chosenPath.length; i++){
+        for (let i = 0; i < chosenPath.length; i++) {
+            await sleep(0);
             const cell: HTMLElement = document.getElementById(`C${chosenPath[i].x_position}${chosenPath[i].y_position}`);
-            cell.classList.add("chosenPath")
+            cell.classList.add("chosenPath");
         }
+    }
+
+    const sleep = (ms: number) => {
+        return new Promise(resolve => setTimeout(resolve, ms))
     }
 
     /*
@@ -65,7 +70,7 @@ const Matrix = (props: Props) => {
      */
     const decolorCells = () => {
         const coloredCells = document.getElementsByClassName("chosenPath");
-        while(coloredCells.length > 0){
+        while (coloredCells.length > 0) {
             coloredCells[0].classList.remove("chosenPath");
         }
     }
