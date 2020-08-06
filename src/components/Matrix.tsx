@@ -17,6 +17,7 @@ interface Props {
 const Matrix = (props: Props) => {
     const {algorithm, seqA, seqB, matchScore, mismatchScore, gapScore} = props;
     const [matrix, setMatrix] = useState([]);
+    const [texts, setTexts] = useState([]);
     const [paths, setPaths] = useState([]);
 
     const printSeqA: string[] = [' ', ...Array.from(seqA)];
@@ -32,24 +33,26 @@ const Matrix = (props: Props) => {
             const needlemanWunschSimilarity = new NeedlemanWunschSimilarity(seqA, seqB, matchScore, mismatchScore, gapScore);
             const similarityTextProducer = new SimpleTextProducer(needlemanWunschSimilarity);
             setMatrix(needlemanWunschSimilarity.matrix);
-            setPaths(similarityTextProducer.produceText());
+            setTexts(similarityTextProducer.produceText());
+            setPaths(needlemanWunschSimilarity.align());
         } else if (algorithm === "NeedlemanWunschDistance") {
             const needlemanWunschDistance = new NeedlemanWunschDistance(seqA, seqB, matchScore, mismatchScore, gapScore);
             const distanceTextProducer = new SimpleTextProducer(needlemanWunschDistance);
             setMatrix(needlemanWunschDistance.matrix);
-            setPaths(distanceTextProducer.produceText());
+            setTexts(distanceTextProducer.produceText());
+            setPaths(needlemanWunschDistance.align());
         } else if (algorithm === "SmithWaterman") {
             const smithWaterman = new SmithWaterman(seqA, seqB, matchScore, mismatchScore, gapScore);
             const smithWatermanTextProducer = new SimpleTextProducer(smithWaterman);
             setMatrix(smithWaterman.matrix);
-            setPaths(smithWatermanTextProducer.produceText());
+            setTexts(smithWatermanTextProducer.produceText());
+            setPaths(smithWaterman.align());
         }
     }
 
-    // every time a change happens to one of the parameters, the matrix and paths should be generated again
+    // every time a change happens to one of the parameters, the matrix and texts should be generated again
     useEffect(() => {
-        console.log(printSeqA, printSeqB);
-        setupMatrix()
+        setupMatrix();
     }, [algorithm, seqA, seqB, matchScore, mismatchScore, gapScore])
 
     return (
@@ -66,13 +69,13 @@ const Matrix = (props: Props) => {
                     <tr key={j}>
                         <th>{printSeqA[j]}</th>
                         {elem.map((cell: Cell, i: number) => (
-                            <th key={i} style={{minWidth: "30px"}}>{cell.final_score}</th>
+                            <th key={i} style={{minWidth: "30px"}} id={`C${cell.x_position}${cell.y_position}`}>{cell.final_score}</th>
                         ))}
                     </tr>
                 ))}
                 </tbody>
             </table>
-            {paths.map((path: string[], i: number) => (
+            {texts.map((path: string[], i: number) => (
                 <ul key={i}>
                     {path.map((text: string, j: number) => (
                         <li key={j}>{text}</li>
