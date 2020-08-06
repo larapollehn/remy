@@ -34,7 +34,7 @@ const Matrix = (props: Props) => {
 
     useEffect(() => {
         createMatrix()
-    }, [algorithm, matchScore, mismatchScore, gapScore])
+    }, [algorithm, seqA, seqB, matchScore, mismatchScore, gapScore])
 
     return (
         <div>
@@ -43,7 +43,7 @@ const Matrix = (props: Props) => {
                 {matrix.map((elem) => (
                     <tr>
                         {elem.map((cell: Cell, i: number) => (
-                            <th key={i}>{cell.final_score}</th>
+                            <th key={i} style={{minWidth: "30px"}}>{cell.final_score}</th>
                         ))}
                     </tr>
                 ))}

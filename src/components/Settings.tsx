@@ -10,7 +10,7 @@ const Settings = () => {
             seqB: "TACAGA",
             matchScore: 1,
             mismatchScore: -1,
-            gapScore: 2
+            gapScore: -2
     });
 
     const {algorithm, seqA, seqB, matchScore, mismatchScore, gapScore} = values;
