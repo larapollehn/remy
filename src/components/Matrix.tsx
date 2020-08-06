@@ -19,7 +19,14 @@ const Matrix = (props: Props) => {
     const [matrix, setMatrix] = useState([]);
     const [paths, setPaths] = useState([]);
 
-    const createMatrix = () => {
+    const printSeqA: string[] = [' ', ...Array.from(seqA)];
+    const printSeqB: string[] = [' ', ' ', ...Array.from(seqB)];
+
+    /*
+    create a matrix based on parameters and align the path(s)
+    set matrix and path(s) as state
+     */
+    const setupMatrix = () => {
         console.log(seqA, seqB, matchScore, mismatchScore, gapScore);
         if (algorithm === "NeedelemanWunschSimilarity") {
             const needlemanWunschSimilarity = new NeedlemanWunschSimilarity(seqA, seqB, matchScore, mismatchScore, gapScore);
@@ -39,8 +46,10 @@ const Matrix = (props: Props) => {
         }
     }
 
+    // every time a change happens to one of the parameters, the matrix and paths should be generated again
     useEffect(() => {
-        createMatrix()
+        console.log(printSeqA, printSeqB);
+        setupMatrix()
     }, [algorithm, seqA, seqB, matchScore, mismatchScore, gapScore])
 
     return (
@@ -48,8 +57,14 @@ const Matrix = (props: Props) => {
             <h2>{algorithm}</h2>
             <table>
                 <tbody>
+                <tr>
+                    {printSeqB.map((char, i) => (
+                        <th key={i}>{char}</th>
+                    ))}
+                </tr>
                 {matrix.map((elem, j) => (
                     <tr key={j}>
+                        <th>{printSeqA[j]}</th>
                         {elem.map((cell: Cell, i: number) => (
                             <th key={i} style={{minWidth: "30px"}}>{cell.final_score}</th>
                         ))}
