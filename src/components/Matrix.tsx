@@ -4,6 +4,7 @@ import NeedlemanWunschDistance from "../algorithms/NeedlemanWunschDistance";
 import SmithWaterman from "../algorithms/SmithWaterman";
 import Cell from "../algorithms/Cell";
 import SimpleTextProducer from "../text/SimpleTextProducer";
+import "../Matrix.css";
 
 interface Props {
     algorithm: string,
@@ -49,10 +50,30 @@ const Matrix = (props: Props) => {
         }
     }
 
+    const visualizePath = (index: number) => (event: any) => {
+        const chosenPath: Cell[] = paths[index];
+        decolorCells();
+        //color the cells belonging to the clicked path
+        for (let i = 0; i < chosenPath.length; i++){
+            const cell: HTMLElement = document.getElementById(`C${chosenPath[i].x_position}${chosenPath[i].y_position}`);
+            cell.classList.add("chosenPath")
+        }
+    }
+
+    /*
+    finds all Cells that are colored, to show path and remove specific css class from them
+     */
+    const decolorCells = () => {
+        const coloredCells = document.getElementsByClassName("chosenPath");
+        while(coloredCells.length > 0){
+            coloredCells[0].classList.remove("chosenPath");
+        }
+    }
+
     // every time a change happens to one of the parameters, the matrix and texts should be generated again
     useEffect(() => {
+        decolorCells();
         setupMatrix();
-        console.log(paths);
     }, [algorithm, seqA, seqB, matchScore, mismatchScore, gapScore])
 
     return (
@@ -69,35 +90,18 @@ const Matrix = (props: Props) => {
                     <tr key={j}>
                         <th>{printSeqA[j]}</th>
                         {elem.map((cell: Cell, i: number) => (
-                            <th key={i} style={{minWidth: "30px"}} id={`C${cell.x_position}${cell.y_position}`}>{cell.final_score}</th>
+                            <th key={i} style={{minWidth: "30px"}}
+                                id={`C${cell.x_position}${cell.y_position}`}>{cell.final_score}</th>
                         ))}
                     </tr>
                 ))}
                 </tbody>
             </table>
-            {texts.map((path: string[], i: number) => (
-                <ul key={i}>
-                    {path.map((text: string, j: number) => (
-                        <li key={j}>{text}</li>
-                    ))}
-                </ul>
-            ))}
-            {paths.length > 1 && (
-                paths.map((path, i) => (
-                    <ul key={i}>
-                        {path.map((node:Cell, j:number) => (
-                            <li key={j}>{node.x_position}/{node.y_position}</li>
-                        ))}
-                    </ul>
-                ))
-            )}
-            {paths.length === 1 && (
-                <ul >
-                    {paths[0].map((node:Cell, j:number) => (
-                        <li key={j}>{node.x_position}/{node.y_position}</li>
-                    ))}
-                </ul>
-            )}
+            <ul>
+                {texts.map((path, i) => (
+                    <li key={i} onClick={visualizePath(i)}>{`${path[0]} ${path[1]} ${path[2]}`}</li>
+                ))}
+            </ul>
         </div>
     )
 }
