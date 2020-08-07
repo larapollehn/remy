@@ -54,7 +54,7 @@ const Matrix = (props: Props) => {
     const visualizePath = (index: number) => async (event: any) => {
         const chosenPath: Cell[] = paths[index];
         const colorSpeed = 1000 - speed;
-        decolorCells();
+        decolorCells("chosenPath");
         //color the cells belonging to the clicked path
         for (let i = 0; i < chosenPath.length; i++) {
             await sleep(colorSpeed);
@@ -70,10 +70,10 @@ const Matrix = (props: Props) => {
     /*
     finds all Cells that are colored, to show path and remove specific css class from them
      */
-    const decolorCells = () => {
-        const coloredCells = document.getElementsByClassName("chosenPath");
+    const decolorCells = (name: string) => {
+        const coloredCells = document.getElementsByClassName(name);
         while (coloredCells.length > 0) {
-            coloredCells[0].classList.remove("chosenPath");
+            coloredCells[0].classList.remove(name);
         }
     }
 
@@ -84,7 +84,7 @@ const Matrix = (props: Props) => {
 
     // every time a change happens to one of the parameters, the matrix and texts should be generated again
     useEffect(() => {
-        decolorCells();
+        decolorCells("chosenPath");
         setupMatrix();
     }, [algorithm, seqA, seqB, matchScore, mismatchScore, gapScore])
 

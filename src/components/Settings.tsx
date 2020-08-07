@@ -50,10 +50,7 @@ const Settings = () => {
             <input id="gapScore" type="number" value={gapScore} onChange={handleInputChange("gapScore")}/>
             <label>Gap</label>
             <br/>
-            {seqA}
-
             <Matrix algorithm={algorithm} seqA={seqA} seqB={seqB} matchScore={matchScore} mismatchScore={mismatchScore} gapScore={gapScore}/>
-
         </div>
     )
 }
