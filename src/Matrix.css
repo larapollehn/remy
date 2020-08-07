@@ -9,3 +9,7 @@
 .ascenderNode{
     background-color: thistle;
 }
+
+.matrixTable, .pathList{
+    cursor: pointer;
+}

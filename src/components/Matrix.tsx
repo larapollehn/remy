@@ -54,7 +54,7 @@ const Matrix = (props: Props) => {
     const visualizePath = (index: number) => async (event: any) => {
         const chosenPath: Cell[] = paths[index];
         const colorSpeed = 1000 - speed;
-        decolorCells("chosenPath");
+        decolorCells(["chosenPath"]);
         //color the cells belonging to the clicked path
         for (let i = 0; i < chosenPath.length; i++) {
             await sleep(colorSpeed);
@@ -68,23 +68,38 @@ const Matrix = (props: Props) => {
     }
 
     /*
-    finds all Cells that are colored, to show path and remove specific css class from them
+    takes an array with class names and removes it from all elements
      */
-    const decolorCells = (name: string) => {
-        const coloredCells = document.getElementsByClassName(name);
-        while (coloredCells.length > 0) {
-            coloredCells[0].classList.remove(name);
+    const decolorCells = (name: string[]) => {
+        for (let i = 0; i < name.length; i++) {
+            const coloredCells = document.getElementsByClassName(name[i]);
+            while (coloredCells.length > 0) {
+                coloredCells[0].classList.remove(name[i]);
+            }
         }
     }
 
     const handleSpeedChange = () => {
-        let speedPicker = document.getElementById("speedPicker") as HTMLInputElement;
+        const speedPicker = document.getElementById("speedPicker") as HTMLInputElement;
         setSpeed(Number(speedPicker.value));
+    }
+
+    const showAscenders = (cell: Cell) => (event: any) => {
+        decolorCells(["ascenderNode", "selectedNode"]);
+        const clickedCell = document.getElementById(`C${cell.x_position}${cell.y_position}`);
+        const ascenders = [cell.top_ascender, cell.left_ascender, cell.top_left_ascender]
+        for (let i = 0; i < ascenders.length; i++) {
+            if (ascenders[i] !== null) {
+                const ascenderCell = document.getElementById(`C${ascenders[i].x_position}${ascenders[i].y_position}`);
+                ascenderCell.classList.add("ascenderNode");
+                clickedCell.classList.add("selectedNode");
+            }
+        }
     }
 
     // every time a change happens to one of the parameters, the matrix and texts should be generated again
     useEffect(() => {
-        decolorCells("chosenPath");
+        decolorCells(["chosenPath", "ascenderNode", "selectedNode"]);
         setupMatrix();
     }, [algorithm, seqA, seqB, matchScore, mismatchScore, gapScore])
 
@@ -93,9 +108,10 @@ const Matrix = (props: Props) => {
             <h2>{algorithm}</h2>
             <label>Visualization Speed</label>
             <div>
-                <label>SLOW</label><input name="speed" type="range" min="0" max="1000" id="speedPicker" onChange={handleSpeedChange}/><label>FAST</label>
+                <label>SLOW</label><input name="speed" type="range" min="0" max="1000" id="speedPicker"
+                                          onChange={handleSpeedChange}/><label>FAST</label>
             </div>
-            <table>
+            <table className="matrixTable">
                 <tbody>
                 <tr>
                     {printSeqB.map((char, i) => (
@@ -107,13 +123,14 @@ const Matrix = (props: Props) => {
                         <th>{printSeqA[j]}</th>
                         {elem.map((cell: Cell, i: number) => (
                             <th key={i} style={{minWidth: "30px"}}
-                                id={`C${cell.x_position}${cell.y_position}`}>{cell.final_score}</th>
+                                id={`C${cell.x_position}${cell.y_position}`}
+                                onClick={showAscenders(cell)}>{cell.final_score}</th>
                         ))}
                     </tr>
                 ))}
                 </tbody>
             </table>
-            <ul>
+            <ul className="pathList">
                 {texts.map((path, i) => (
                     <li key={i} onClick={visualizePath(i)}>{`${path[0]} ${path[1]} ${path[2]}`}</li>
                 ))}
