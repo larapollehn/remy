@@ -52,6 +52,7 @@ export default class SmithWaterman extends AligningAlgorithm {
                 this.matrix[0][i].final_score = 0;
             } else {
                 this.matrix[0][i].final_score = (this.gap * i) < 0 ? 0 : (this.gap * i);
+                this.matrix[0][i].left_ascender = this.matrix[0][i-1];
             }
         }
 
@@ -59,6 +60,7 @@ export default class SmithWaterman extends AligningAlgorithm {
         for (let i = 0; i < this.matrix.length; i++) {
             if (i !== 0) {
                 this.matrix[i][0].final_score = (this.gap * i) < 0 ? 0 : (this.gap * i);
+                this.matrix[i][0].top_ascender = this.matrix[i-1][0];
             }
         }
 
