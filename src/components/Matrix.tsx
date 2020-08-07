@@ -20,6 +20,7 @@ const Matrix = (props: Props) => {
     const [matrix, setMatrix] = useState([]);
     const [texts, setTexts] = useState([]);
     const [paths, setPaths] = useState([]);
+    const [speed, setSpeed] = useState(0);
 
     const printSeqA: string[] = [' ', ...Array.from(seqA)];
     const printSeqB: string[] = [' ', ' ', ...Array.from(seqB)];
@@ -52,10 +53,11 @@ const Matrix = (props: Props) => {
 
     const visualizePath = (index: number) => async (event: any) => {
         const chosenPath: Cell[] = paths[index];
+        const colorSpeed = 1000 - speed;
         decolorCells();
         //color the cells belonging to the clicked path
         for (let i = 0; i < chosenPath.length; i++) {
-            await sleep(0);
+            await sleep(colorSpeed);
             const cell: HTMLElement = document.getElementById(`C${chosenPath[i].x_position}${chosenPath[i].y_position}`);
             cell.classList.add("chosenPath");
         }
@@ -75,6 +77,11 @@ const Matrix = (props: Props) => {
         }
     }
 
+    const handleSpeedChange = () => {
+        let speedPicker = document.getElementById("speedPicker") as HTMLInputElement;
+        setSpeed(Number(speedPicker.value));
+    }
+
     // every time a change happens to one of the parameters, the matrix and texts should be generated again
     useEffect(() => {
         decolorCells();
@@ -84,6 +91,10 @@ const Matrix = (props: Props) => {
     return (
         <div>
             <h2>{algorithm}</h2>
+            <label>Visualization Speed</label>
+            <div>
+                <label>SLOW</label><input name="speed" type="range" min="0" max="1000" id="speedPicker" onChange={handleSpeedChange}/><label>FAST</label>
+            </div>
             <table>
                 <tbody>
                 <tr>
