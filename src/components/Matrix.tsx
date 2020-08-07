@@ -20,7 +20,7 @@ const Matrix = (props: Props) => {
     const [matrix, setMatrix] = useState([]);
     const [texts, setTexts] = useState([]);
     const [paths, setPaths] = useState([]);
-    const [speed, setSpeed] = useState(0);
+    const [speed, setSpeed] = useState(1000);
 
     const printSeqA: string[] = [' ', ...Array.from(seqA)];
     const printSeqB: string[] = [' ', ' ', ...Array.from(seqB)];
@@ -109,7 +109,7 @@ const Matrix = (props: Props) => {
             <label>Visualization Speed</label>
             <div>
                 <label>SLOW</label><input name="speed" type="range" min="0" max="1000" id="speedPicker"
-                                          onChange={handleSpeedChange}/><label>FAST</label>
+                                          onChange={handleSpeedChange} defaultValue={"1000"}/><label>FAST</label>
             </div>
             <table className="matrixTable">
                 <tbody>
