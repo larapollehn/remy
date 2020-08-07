@@ -98,32 +98,39 @@ const Matrix = (props: Props) => {
     }, [algorithm, seqA, seqB, matchScore, mismatchScore, gapScore])
 
     return (
-        <div>
-            <h2>{algorithm}</h2>
-            <table className="matrixTable">
-                <tbody>
-                <tr>
-                    {printSeqB.map((char, i) => (
-                        <th key={i}>{char}</th>
-                    ))}
-                </tr>
-                {matrix.map((elem, j) => (
-                    <tr key={j}>
-                        <th>{printSeqA[j]}</th>
-                        {elem.map((cell: Cell, i: number) => (
-                            <th key={i} style={{minWidth: "30px"}}
-                                id={`C${cell.x_position}${cell.y_position}`}
-                                onClick={showAscenders(cell)}>{cell.final_score}</th>
+        <div id="createdMatrixComponent">
+            <div id="algorithmComponent">
+                <h2>{algorithm}</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A culpa dolores eveniet hic laborum magnam natus nesciunt perspiciatis ut! Accusamus adipisci, aliquid architecto, aspernatur assumenda aut consectetur corporis deserunt doloremque eligendi ex in, iure laborum laudantium minus mollitia nostrum pariatur porro possimus provident quaerat quis quo rem saepe sequi sit soluta suscipit tenetur voluptas voluptatibus. Aliquam architecto corporis dicta dolorum fugit laborum minima nostrum officia omnis placeat quaerat quas quibusdam quo quod quos recusandae, reprehenderit similique suscipit tempora tenetur veniam voluptas voluptates! Aspernatur at beatae commodi delectus deleniti, dignissimos doloribus dolorum ducimus est excepturi fuga fugiat hic illo inventore ipsam iste iure laudantium maxime modi nam necessitatibus nobis non obcaecati odio officiis, omnis perferendis porro qui quidem recusandae repellat repudiandae rerum temporibus totam unde vero voluptatum. Amet deleniti esse harum ipsa iusto labore libero nulla omnis sed sequi, tempore, vel voluptates, voluptatum? Architecto eius excepturi natus necessitatibus numquam quia ullam. Assumenda dolor dolores doloribus est eveniet exercitationem fugiat libero nihil quia repellendus sequi ullam, ut vero? Ab facilis ipsam laudantium mollitia, quos vero. Dicta ex ipsa iusto modi molestiae nemo officia veniam. Accusantium atque doloremque earum eius iusto non quam, quas vel! Id ipsum natus odit quam quidem saepe, vel?</p>
+            </div>
+            <div id="alignedSequenceComponent">
+                <table className="matrixTable">
+                    <tbody>
+                    <tr>
+                        {printSeqB.map((char, i) => (
+                            <th key={i}>{char}</th>
                         ))}
                     </tr>
-                ))}
-                </tbody>
-            </table>
-            <ul className="pathList">
-                {texts.map((path, i) => (
-                    <li key={i} onClick={visualizePath(i)}>{`${path[0]} ${path[1]} ${path[2]}`}</li>
-                ))}
-            </ul>
+                    {matrix.map((elem, j) => (
+                        <tr key={j}>
+                            <th>{printSeqA[j]}</th>
+                            {elem.map((cell: Cell, i: number) => (
+                                <th key={i} style={{minWidth: "30px"}}
+                                    id={`C${cell.x_position}${cell.y_position}`}
+                                    onClick={showAscenders(cell)}>{cell.final_score}</th>
+                            ))}
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+            <div id="alignmentPathComponent">
+                <ul className="pathList">
+                    {texts.map((path, i) => (
+                        <li key={i} onClick={visualizePath(i)}>{`${path[0]} ${path[1]} ${path[2]}`}</li>
+                    ))}
+                </ul>
+            </div>
         </div>
     )
 }

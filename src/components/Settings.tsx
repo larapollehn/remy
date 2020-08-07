@@ -31,9 +31,11 @@ const Settings = () => {
     }
 
     return (
-        <div>
+        <div id="parentComponent">
+            <div id="logoComponent">
+                <h1>Remy</h1>
+            </div>
             <div id="settingsComponent">
-                <h3>Settings</h3>
                 <select onChange={handleInputChange("algorithm")}>
                     {
                         algorithms.map((algorithm, i) => (
