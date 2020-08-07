@@ -4,7 +4,6 @@ import NeedlemanWunschDistance from "../algorithms/NeedlemanWunschDistance";
 import SmithWaterman from "../algorithms/SmithWaterman";
 import Cell from "../algorithms/Cell";
 import SimpleTextProducer from "../text/SimpleTextProducer";
-import "../Matrix.css";
 
 interface Props {
     algorithm: string,
@@ -13,14 +12,14 @@ interface Props {
     matchScore: number,
     mismatchScore: number,
     gapScore: number,
+    speed: number
 }
 
 const Matrix = (props: Props) => {
-    const {algorithm, seqA, seqB, matchScore, mismatchScore, gapScore} = props;
+    const {algorithm, seqA, seqB, matchScore, mismatchScore, gapScore, speed} = props;
     const [matrix, setMatrix] = useState([]);
     const [texts, setTexts] = useState([]);
     const [paths, setPaths] = useState([]);
-    const [speed, setSpeed] = useState(1000);
 
     const printSeqA: string[] = [' ', ...Array.from(seqA)];
     const printSeqB: string[] = [' ', ' ', ...Array.from(seqB)];
@@ -79,11 +78,6 @@ const Matrix = (props: Props) => {
         }
     }
 
-    const handleSpeedChange = () => {
-        const speedPicker = document.getElementById("speedPicker") as HTMLInputElement;
-        setSpeed(Number(speedPicker.value));
-    }
-
     const showAscenders = (cell: Cell) => (event: any) => {
         decolorCells(["ascenderNode", "selectedNode"]);
         const clickedCell = document.getElementById(`C${cell.x_position}${cell.y_position}`);
@@ -106,11 +100,6 @@ const Matrix = (props: Props) => {
     return (
         <div>
             <h2>{algorithm}</h2>
-            <label>Visualization Speed</label>
-            <div>
-                <label>SLOW</label><input name="speed" type="range" min="0" max="1000" id="speedPicker"
-                                          onChange={handleSpeedChange} defaultValue={"1000"}/><label>FAST</label>
-            </div>
             <table className="matrixTable">
                 <tbody>
                 <tr>
