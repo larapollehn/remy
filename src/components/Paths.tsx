@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useLayoutEffect} from "react";
 import {decolorCells, sequenceColor} from "../Utils";
 import Cell from "../algorithms/Cell";
 
@@ -12,6 +12,7 @@ const Paths = (props: Props) => {
     const {texts, paths, speed} = props;
 
     const visualizePath = (index: number) => async (event: any) => {
+        console.log('visualize');
         // @ts-ignore
         const chosenPath: Cell[] = paths[index];
         const colorSpeed = 1000 - speed;
@@ -24,6 +25,23 @@ const Paths = (props: Props) => {
         }
     };
 
+    /**
+     * visualize the first path directly after rendering
+     */
+    useEffect(() => {
+        console.log(paths);
+        if(paths && paths.length > 0){
+            // @ts-ignore
+            const chosenPath: Cell[] = paths[0];
+            decolorCells(["chosenPath"]);
+            //color the cells belonging to the clicked path
+            for (let i = 0; i < chosenPath.length; i++) {
+                const cell: HTMLElement = document.getElementById(`C${chosenPath[i].x_position}${chosenPath[i].y_position}`);
+                cell.classList.add("chosenPath");
+            }
+        }
+    }, [paths]);
+
     const sleep = (ms: number) => {
         return new Promise(resolve => setTimeout(resolve, ms))
     };
@@ -31,8 +49,8 @@ const Paths = (props: Props) => {
     return (
         <ul className="pathList">
             {texts.map((path, i) => (
-                <li key={i} onClick={visualizePath(i)} className="path">
-                    <div>
+                <li key={i} id={`P${i}`} onClick={visualizePath(i)} className="path">
+                    <div className={"sequence"}>
                         <p className={"pathString"}>{Array.from(path[0]).map((char, i: number) => (
                             <span className={"pathNucleotide upperNucleotide"} key={i}
                                   style={{backgroundColor: sequenceColor(char)}}>{char}</span>

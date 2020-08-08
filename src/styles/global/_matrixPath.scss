@@ -1,15 +1,18 @@
-#alignedSequenceComponent, #alignmentPathComponent, #algorithmComponent{
-  overflow: auto;
+#alignedSequenceComponent{
+    padding: 0 0 0 5%;
+    overflow: auto;
 }
 
-#alignedSequenceComponent{
-    padding: 0 5%
+#alignmentPathComponent{
+    padding: 0 5%;
 }
 
 #alignedSequenceComponent, #alignmentPathComponent{
   font-family: "Lucida Console", Courier, monospace;
 }
 
-#createdMatrixComponent{
+#alignedSequenceComponent{
     width: 100%;
+    height: 100%;
+    overflow: auto;
 }
