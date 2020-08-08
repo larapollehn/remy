@@ -4,6 +4,8 @@ import NeedlemanWunschDistance from "../algorithms/NeedlemanWunschDistance";
 import SmithWaterman from "../algorithms/SmithWaterman";
 import Cell from "../algorithms/Cell";
 import SimpleTextProducer from "../text/SimpleTextProducer";
+import {decolorCells, sequenceColor} from "../Utils";
+import Paths from "./Paths";
 
 interface Props {
     algorithm: string,
@@ -29,52 +31,24 @@ const Matrix = (props: Props) => {
     set matrix and path(s) as state
      */
     const setupMatrix = () => {
-        if (algorithm === "NeedelemanWunschSimilarity") {
+        if (algorithm === "Needleman-Wunsch Similarity") {
             const needlemanWunschSimilarity = new NeedlemanWunschSimilarity(seqA, seqB, matchScore, mismatchScore, gapScore);
             const similarityTextProducer = new SimpleTextProducer(needlemanWunschSimilarity);
             setMatrix(needlemanWunschSimilarity.matrix);
             setTexts(similarityTextProducer.produceText());
             setPaths(needlemanWunschSimilarity.align());
-        } else if (algorithm === "NeedlemanWunschDistance") {
+        } else if (algorithm === "Needleman-Wunsch Distance") {
             const needlemanWunschDistance = new NeedlemanWunschDistance(seqA, seqB, matchScore, mismatchScore, gapScore);
             const distanceTextProducer = new SimpleTextProducer(needlemanWunschDistance);
             setMatrix(needlemanWunschDistance.matrix);
             setTexts(distanceTextProducer.produceText());
             setPaths(needlemanWunschDistance.align());
-        } else if (algorithm === "SmithWaterman") {
+        } else if (algorithm === "Smith-Waterman") {
             const smithWaterman = new SmithWaterman(seqA, seqB, matchScore, mismatchScore, gapScore);
             const smithWatermanTextProducer = new SimpleTextProducer(smithWaterman);
             setMatrix(smithWaterman.matrix);
             setTexts(smithWatermanTextProducer.produceText());
             setPaths(smithWaterman.align());
-        }
-    }
-
-    const visualizePath = (index: number) => async (event: any) => {
-        const chosenPath: Cell[] = paths[index];
-        const colorSpeed = 1000 - speed;
-        decolorCells(["chosenPath"]);
-        //color the cells belonging to the clicked path
-        for (let i = 0; i < chosenPath.length; i++) {
-            await sleep(colorSpeed);
-            const cell: HTMLElement = document.getElementById(`C${chosenPath[i].x_position}${chosenPath[i].y_position}`);
-            cell.classList.add("chosenPath");
-        }
-    }
-
-    const sleep = (ms: number) => {
-        return new Promise(resolve => setTimeout(resolve, ms))
-    }
-
-    /*
-    takes an array with class names and removes it from all elements
-     */
-    const decolorCells = (name: string[]) => {
-        for (let i = 0; i < name.length; i++) {
-            const coloredCells = document.getElementsByClassName(name[i]);
-            while (coloredCells.length > 0) {
-                coloredCells[0].classList.remove(name[i]);
-            }
         }
     }
 
@@ -91,6 +65,28 @@ const Matrix = (props: Props) => {
         }
     }
 
+    const cellGradient = (score: number) => {
+        if (score <= -20) {
+            return "#d2eeed";
+        } else if (score <= -15) {
+            return "#bce6e4";
+        } else if (score <= -10) {
+            return "#a5dddc";
+        } else if (score <= -5) {
+            return "#8fd5d3";
+        } else if (score <= 0) {
+            return "#79cdca";
+        } else if (score <= 5) {
+            return "#62c4c2";
+        } else if (score <= 10) {
+            return "#4cbcb9";
+        } else if (score <= 15) {
+            return "#36b4b0";
+        } else if (score <= 20) {
+            return "#20aca8";
+        }
+    }
+
     // every time a change happens to one of the parameters, the matrix and texts should be generated again
     useEffect(() => {
         decolorCells(["chosenPath", "ascenderNode", "selectedNode"]);
@@ -99,25 +95,26 @@ const Matrix = (props: Props) => {
 
     return (
         <div id="createdMatrixComponent">
-            <div id="algorithmComponent">
-                <h2>{algorithm}</h2>
-            </div>
             <div id="alignedSequenceComponent">
                 <table className="matrixTable">
                     <tbody>
                     <tr>
                         {printSeqB.map((char, i) => (
-                            <th key={i} className="tableCells">{char}</th>
+                            <th key={i} className="tableCells"
+                                style={{backgroundColor: sequenceColor(char)}}
+                            >{char}</th>
                         ))}
                     </tr>
                     {matrix.map((elem, j) => (
                         <tr key={j}>
-                            <th className="tableCells">{printSeqA[j]}</th>
+                            <th className="tableCells"
+                                style={{backgroundColor: sequenceColor(printSeqA[j])}}>{printSeqA[j]}</th>
                             {elem.map((cell: Cell, i: number) => (
                                 <th key={i}
-                                    className="tableCells"
+                                    className="tableCells innerCell"
                                     id={`C${cell.x_position}${cell.y_position}`}
-                                    onClick={showAscenders(cell)}>{cell.final_score}</th>
+                                    onClick={showAscenders(cell)}
+                                    style={{backgroundColor: cellGradient(cell.final_score)}}>{cell.final_score}</th>
                             ))}
                         </tr>
                     ))}
@@ -125,17 +122,7 @@ const Matrix = (props: Props) => {
                 </table>
             </div>
             <div id="alignmentPathComponent">
-                <ul className="pathList">
-                    {texts.map((path, i) => (
-                        <li key={i} onClick={visualizePath(i)} className="path">
-                            <div>
-                                <p>{path[0]}</p>
-                                <p>{path[1]}</p>
-                                <p>{path[2]}</p>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
+                <Paths texts={texts} paths={paths} speed={speed}/>
             </div>
         </div>
     )

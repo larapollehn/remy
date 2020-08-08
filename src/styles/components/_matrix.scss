@@ -4,20 +4,32 @@
 }
 
 .tableCells{
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  color: white;
+}
+
+.innerCell{
+  color: #2d2d2d;
 }
 
 .chosenPath{
-  background-color: cornflowerblue;
+  background-color: cornflowerblue !important;
 }
 
 .selectedNode{
-  background-color: mediumaquamarine;
+  background-color: mediumaquamarine !important;
 }
 
 .ascenderNode{
-  background-color: thistle;
+  background-color: thistle !important;
 }
 
+@media only screen and (max-width: 425px){
+  .tableCells{
+    width: 30px;
+    height: 30px;
+  }
+}
 

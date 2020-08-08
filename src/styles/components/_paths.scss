@@ -7,9 +7,18 @@
 .path{
   padding: 5px;
   margin-bottom: 2%;
-  background-color: white;
-  border: 1px solid black;
   border-radius: 5px;
+}
+
+.pathNucleotide{
+  margin: 3px;
+  padding: 3px;
+  color: white;
+  font-weight: bold;
+}
+
+.pathString:first-child{
+  margin-bottom: 3px;
 }
 
 @media only screen and(max-width: 425px){

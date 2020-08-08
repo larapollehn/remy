@@ -18,3 +18,23 @@ export function copyArray<T>(ts: T[]): T[] {
     }
     return ret;
 }
+
+export function sequenceColor(char: any): string{
+    return char === "A" ? "#E3A357" :
+        char === "T" ? "#E9D063" :
+            char === "C" ? "#5B967B" :
+                char === "G" ? "#3d999d" :
+                    "white";
+}
+
+/*
+    takes an array with class names and removes it from all elements
+     */
+export function decolorCells(name: string[]): void{
+    for (let i = 0; i < name.length; i++) {
+        const coloredCells = document.getElementsByClassName(name[i]);
+        while (coloredCells.length > 0) {
+            coloredCells[0].classList.remove(name[i]);
+        }
+    }
+}

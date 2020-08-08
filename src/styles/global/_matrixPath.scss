@@ -1,6 +1,9 @@
 #alignedSequenceComponent, #alignmentPathComponent, #algorithmComponent{
   overflow: auto;
-  padding: 2%;
+}
+
+#alignedSequenceComponent{
+    padding: 0 5%
 }
 
 #alignedSequenceComponent, #alignmentPathComponent{
@@ -9,20 +12,4 @@
 
 #createdMatrixComponent{
     width: 100%;
-}
-
-#alignmentPathComponent{
-  border-top: 1px solid lightgrey;
-}
-
-#alignedSequenceComponent{
-  border-right: 1px solid lightgrey;
-  border-top: 1px solid lightgrey;
-  border-left: 1px solid lightgrey;
-}
-
-@media only screen and(max-width: 425px){
-  #alignedSequenceComponent, #alignmentPathComponent{
-    border-top: none;
-  }
 }
