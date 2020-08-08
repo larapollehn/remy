@@ -30,7 +30,6 @@
 
 @media only screen and (max-width: 768px){
   #parentComponent{
-    background-color: aquamarine;
     grid-template-columns: 30% 70%;
     grid-template-rows: 10% 90%;
   }
@@ -39,27 +38,22 @@
 @media only screen and (max-width: 425px){
   #parentComponent{
     height: 100vh;
-    background-color: aquamarine;
     grid-template-columns: 100%;
     grid-template-rows: 7% 20% 7% 66%;
   }
   #logoComponent{
-    background-color: cornflowerblue;
     grid-row: 1/2;
     grid-column: 1/2;
   }
   #settingsComponent{
-    background-color: royalblue;
     grid-row: 2/3;
     grid-column: 1/2
   }
   #speedRangeComponent{
-    background-color: lightblue;
     grid-row: 3/4;
     grid-column: 1/2;
   }
   #matrixComponent{
-    background-color: steelblue;
     grid-row: 4/5;
     grid-column: 1/2;
   }

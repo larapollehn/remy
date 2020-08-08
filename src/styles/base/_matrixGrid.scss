@@ -31,17 +31,14 @@
     grid-template-rows: 60% 40%;
   }
   #algorithmComponent{
-    background-color: lightgreen;
     grid-column: 1/3;
     grid-row: 2/3;
   }
   #alignedSequenceComponent{
-    background-color: darkseagreen;
     grid-column: 1/2;
     grid-row: 1/2;
   }
   #alignmentPathComponent{
-    background-color: mediumseagreen;
     grid-column: 2/3;
     grid-row: 1/2;
   }

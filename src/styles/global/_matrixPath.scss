@@ -6,3 +6,22 @@
 #alignedSequenceComponent, #alignmentPathComponent{
   font-family:  "Lucida Console", Courier, monospace;
 }
+
+#createdMatrixComponent{
+    width: 100%;
+}
+
+#alignmentPathComponent{
+  border-top: 1px solid lightgrey;
+}
+
+#alignedSequenceComponent{
+  border-right: 1px solid lightgrey;
+  border-top: 1px solid lightgrey;
+}
+
+@media only screen and(max-width: 425px){
+  #alignedSequenceComponent, #alignmentPathComponent{
+    border-top: none;
+  }
+}

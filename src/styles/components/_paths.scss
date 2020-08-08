@@ -1,6 +1,4 @@
 /* #alignmentPathComponent */
-
-
 .pathList{
   list-style: none;
   cursor: pointer;
@@ -11,4 +9,11 @@
   margin-bottom: 2%;
   background-color: white;
   border: 1px solid black;
+  border-radius: 5px;
+}
+
+@media only screen and(max-width: 425px){
+  .path{
+    border: none;
+  }
 }
