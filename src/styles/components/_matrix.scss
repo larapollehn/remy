@@ -13,3 +13,7 @@
 .matrixTable, .pathList{
   cursor: pointer;
 }
+
+#alignedSequenceComponent, #alignmentPathComponent{
+  overflow: auto;
+}
