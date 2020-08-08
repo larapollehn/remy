@@ -50,7 +50,7 @@ const Matrix = (props: Props) => {
             setTexts(smithWatermanTextProducer.produceText());
             setPaths(smithWaterman.align());
         }
-    }
+    };
 
     const showAscenders = (cell: Cell) => (event: any) => {
         decolorCells(["ascenderNode", "selectedNode"]);
@@ -63,7 +63,7 @@ const Matrix = (props: Props) => {
                 clickedCell.classList.add("selectedNode");
             }
         }
-    }
+    };
 
     const cellGradient = (score: number) => {
         if (score <= -20) {
@@ -85,7 +85,7 @@ const Matrix = (props: Props) => {
         } else if (score <= 20) {
             return "#20aca8";
         }
-    }
+    };
 
     // every time a change happens to one of the parameters, the matrix and texts should be generated again
     useEffect(() => {

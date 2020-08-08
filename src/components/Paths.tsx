@@ -34,11 +34,11 @@ const Paths = (props: Props) => {
                 <li key={i} onClick={visualizePath(i)} className="path">
                     <div>
                         <p className={"pathString"}>{Array.from(path[0]).map((char, i: number) => (
-                            <span className={"pathNucleotide"} key={i}
+                            <span className={"pathNucleotide upperNucleotide"} key={i}
                                   style={{backgroundColor: sequenceColor(char)}}>{char}</span>
                         ))}</p>
                         <p className={"pathString"}>{Array.from(path[2]).map((char, i: number) => (
-                            <span className={"pathNucleotide"} key={i}
+                            <span className={"pathNucleotide lowerNucleotide"} key={i}
                                   style={{backgroundColor: sequenceColor(char)}}>{char}</span>
                         ))}</p>
                     </div>

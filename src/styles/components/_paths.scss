@@ -21,6 +21,14 @@
   margin-bottom: 3px;
 }
 
+.upperNucleotide{
+  border-radius: 5px 5px 0 0;
+}
+
+.lowerNucleotide{
+  border-radius: 0 0 5px 5px;
+}
+
 @media only screen and(max-width: 425px){
   .path{
     border: none;
