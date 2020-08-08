@@ -1,15 +1,15 @@
 /* #settingsComponent */
-
 #settingsComponent{
-  background-color: mediumseagreen;
-  padding: 5%;
+  padding: 0 5% 0 5%;
   text-align: left;
 }
 
 .settingsContainer{
   border-radius: 5px;
   padding: 5%;
-  background-color: #67d095;
+  background-color: #f15949;
+  color: white;
+  font-weight: bolder;
 }
 
 .algorithmSelect{
@@ -22,6 +22,16 @@
 
 .formInput{
   margin-top: 20px;
+  width: 100%;
+}
+
+.formInputScore{
+  width: 30%;
+  display: inline-block;
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 1.5%;
+  margin-right: 1.5%;
 }
 
 .userInput{
@@ -36,6 +46,30 @@
   border-radius: 5px;
 }
 
+.sequenceLabel{
+  font-weight: bolder;
+}
+
+.sequenceInput, .sequenceBtn{
+  height: 30px;
+  font-size: 17px;
+}
+
+.dnaInputContainer{
+  width: 100%;
+}
+.sequenceInput{
+  border-radius: 5px;
+  width: 49%;
+  padding-left: 5px;
+  margin-right: 1%;
+}
+.sequenceBtn{
+  width: 10%;
+  margin: 1%;
+  border-radius: 5px;
+}
+
 @media only screen and(max-width: 425px){
   #settingsComponent{
     padding: 1%;
@@ -44,6 +78,7 @@
   }
   .settingsContainer{
     padding: 1%;
+    border-radius: 5px 5px 0 0;
   }
   .algorithmSelect{
     width: 100%;
@@ -63,11 +98,15 @@
 
   .inputField{
     margin-top: 2px;
-    width: 50%;
+    width: 100%;
+    height: 30px;
   }
 
   .inputLabel{
-    width: 30%;
-    display: inline-block;
+    display: block;
+  }
+
+  .formInputScore{
+    margin-top: 2px;
   }
 }

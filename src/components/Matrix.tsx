@@ -101,7 +101,6 @@ const Matrix = (props: Props) => {
         <div id="createdMatrixComponent">
             <div id="algorithmComponent">
                 <h2>{algorithm}</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium consequuntur est eum illo iste molestias qui quidem saepe sit tempore? Asperiores assumenda autem blanditiis consequuntur culpa dicta doloribus, ea eaque eveniet ex exercitationem explicabo facere fuga hic id labore laborum laudantium magnam maxime, minima, modi natus nisi nostrum odio porro quaerat quam quibusdam quod quos reiciendis sapiente veritatis voluptas voluptates. Accusantium ad architecto, aspernatur aut dolore error esse expedita fugiat impedit inventore ipsam maxime minus natus nesciunt odio quibusdam repellat reprehenderit similique tenetur totam! Blanditiis cum dolorum soluta ut velit?</p>
             </div>
             <div id="alignedSequenceComponent">
                 <table className="matrixTable">

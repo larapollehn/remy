@@ -19,27 +19,26 @@
   grid-row: 2/3;
   grid-column: 1/2;
 }
-#speedRangeComponent{
-  grid-row: 1/2;
-  grid-column: 2/3;
-}
 #matrixComponent{
-  grid-row: 2/3;
+  grid-row: 1/3;
   grid-column: 2/3;
 }
 
 @media only screen and (max-width: 768px){
   #parentComponent{
     grid-template-columns: 30% 70%;
-    grid-template-rows: 10% 90%;
+    grid-template-rows: 10% 60% 40%;
   }
 }
 
 @media only screen and (max-width: 425px){
+  .break{
+    display: none;
+  }
   #parentComponent{
     height: 100vh;
     grid-template-columns: 100%;
-    grid-template-rows: 7% 20% 7% 66%;
+    grid-template-rows: 7% 35% 57%;
   }
   #logoComponent{
     grid-row: 1/2;
@@ -49,12 +48,8 @@
     grid-row: 2/3;
     grid-column: 1/2
   }
-  #speedRangeComponent{
-    grid-row: 3/4;
-    grid-column: 1/2;
-  }
   #matrixComponent{
-    grid-row: 4/5;
+    grid-row: 3/4;
     grid-column: 1/2;
   }
 }
