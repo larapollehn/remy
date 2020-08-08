@@ -1,3 +1,15 @@
+/* #alignedSequenceComponent */
+.matrixTable{
+  cursor: pointer;
+  border: 1px solid black;
+  background-color: white;
+}
+
+.tableCells{
+  width: 30px;
+  height: 30px;
+}
+
 .chosenPath{
   background-color: cornflowerblue;
 }
@@ -8,12 +20,4 @@
 
 .ascenderNode{
   background-color: thistle;
-}
-
-.matrixTable, .pathList{
-  cursor: pointer;
-}
-
-#alignedSequenceComponent, #alignmentPathComponent{
-  overflow: auto;
 }

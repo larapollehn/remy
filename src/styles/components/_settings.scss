@@ -1,0 +1,37 @@
+/* #settingsComponent */
+
+#settingsComponent{
+  background-color: mediumseagreen;
+  padding: 5%;
+  text-align: left;
+}
+
+.settingsContainer{
+  border-radius: 5px;
+  padding: 5%;
+  background-color: #67d095;
+}
+
+.algorithmSelect{
+  width: 100%;
+  height: 30px;
+  font-size: 19px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.formInput{
+  margin-top: 20px;
+}
+
+.userInput{
+  width: 100%;
+  height: 30px;
+  font-size: 17px;
+}
+
+.inputField{
+  margin-top: 2px;
+  padding-left: 5px;
+  border-radius: 5px;
+}
