@@ -4,13 +4,14 @@ import Matrix from "./Matrix";
 import mouse from "../mouse.png";
 import Infos from "./Infos";
 import Equation from "./Equation";
+import {algorithmNames, defaultScores} from "../Globals";
 
 const Settings = () => {
-    const algorithms = ["Needleman-Wunsch Similarity", "Needleman-Wunsch Distance", "Smith-Waterman"];
+    const algorithms = algorithmNames;
     const [values, setValues] = useState({
         algorithm: "Needleman-Wunsch Similarity",
-        seqA: 'GATACAAAT',
-        seqB: "TACAGAATC",
+        seqA: 'AATCG',
+        seqB: "AACG",
         matchScore: 1,
         mismatchScore: -1,
         gapScore: -2,
@@ -25,8 +26,11 @@ const Settings = () => {
     }
 
     const handleInputChange = (target: string) => (event: any) => {
-        if (target === "seqA" || target === "seqB" || target === "algorithm") {
+        if (target === "seqA" || target === "seqB") {
             setValues({...values, [target]: event.target.value})
+        } else if (target === "algorithm") {
+            const scores = defaultScores.get(event.target.value);
+            setValues({...values, [target]: event.target.value, matchScore: scores.match, mismatchScore: scores.mismatch, gapScore: scores.gap})
         } else {
             setValues({...values, [target]: Number(event.target.value)})
         }

@@ -1,11 +1,8 @@
 import React, {useEffect, useState} from "react";
-import NeedlemanWunschSimilarity from "../algorithms/NeedlemanWunschSimilarity";
-import NeedlemanWunschDistance from "../algorithms/NeedlemanWunschDistance";
-import SmithWaterman from "../algorithms/SmithWaterman";
 import Cell from "../algorithms/Cell";
-import SimpleTextProducer from "../text/SimpleTextProducer";
 import {decolorCells, sequenceColor} from "../Utils";
 import Paths from "./Paths";
+import {setupFunction} from "../Globals";
 
 interface Props {
     algorithm: string,
@@ -31,25 +28,12 @@ const Matrix = (props: Props) => {
     set matrix and path(s) as state
      */
     const setupMatrix = () => {
-        if (algorithm === "Needleman-Wunsch Similarity") {
-            const needlemanWunschSimilarity = new NeedlemanWunschSimilarity(seqA, seqB, matchScore, mismatchScore, gapScore);
-            const similarityTextProducer = new SimpleTextProducer(needlemanWunschSimilarity);
-            setMatrix(needlemanWunschSimilarity.matrix);
-            setTexts(similarityTextProducer.produceText());
-            setPaths(needlemanWunschSimilarity.align());
-        } else if (algorithm === "Needleman-Wunsch Distance") {
-            const needlemanWunschDistance = new NeedlemanWunschDistance(seqA, seqB, matchScore, mismatchScore, gapScore);
-            const distanceTextProducer = new SimpleTextProducer(needlemanWunschDistance);
-            setMatrix(needlemanWunschDistance.matrix);
-            setTexts(distanceTextProducer.produceText());
-            setPaths(needlemanWunschDistance.align());
-        } else if (algorithm === "Smith-Waterman") {
-            const smithWaterman = new SmithWaterman(seqA, seqB, matchScore, mismatchScore, gapScore);
-            const smithWatermanTextProducer = new SimpleTextProducer(smithWaterman);
-            setMatrix(smithWaterman.matrix);
-            setTexts(smithWatermanTextProducer.produceText());
-            setPaths(smithWaterman.align());
-        }
+        const setup = setupFunction.get(algorithm);
+        const workers = setup(seqA, seqB, matchScore, mismatchScore, gapScore);
+
+        setMatrix(workers.algorithmMatrix.matrix);
+        setTexts(workers.textProducer.produceText());
+        setPaths(workers.algorithmMatrix.align());
     };
 
     const showAscenders = (cell: Cell) => (event: any) => {
