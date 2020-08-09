@@ -45,7 +45,7 @@ const Paths = (props: Props) => {
      * visualize the first path directly after rendering
      */
     useEffect(() => {
-        if (paths && paths.length > 0) {
+        if (visiblePaths && visiblePaths.length > 0) {
             decolorCells(["chosenPath", "selectedPath"]);
             const selectedPath = document.getElementById(`P0`);
             if (selectedPath) {
@@ -59,9 +59,12 @@ const Paths = (props: Props) => {
                 cell.classList.add("chosenPath");
             }
         }
-        setVisiblePaths(texts.slice(0, itemPerPage));
         createPagination();
-    }, [paths]);
+    }, [visiblePaths]);
+
+    useEffect(() => {
+        setVisiblePaths(texts.slice(0, itemPerPage));
+    }, [paths])
 
     const sleep = (ms: number) => {
         return new Promise(resolve => setTimeout(resolve, ms))
