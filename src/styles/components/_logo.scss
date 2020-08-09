@@ -1,15 +1,26 @@
 /* #logoComponent */
+@import "../global/paddingMargin";
+$logoHeight: 80px;
 
 #logoComponent{
-  padding: 1%;
-  display: inline;
-  margin: 0 auto;
+  padding: 2% 0 0 $componentPadding;
+}
+
+.logoName, .mouseLogo{
+  float: left;
+}
+.brand{
   width: 90%;
+  margin: 0 auto;
 }
-
-.logo{
-  height: 100%;
-  width: 100%;
+.mouseLogo{
+  height: $logoHeight;
 }
-
+.logoName{
+  line-height: $logoHeight;
+}
+.logoSub{
+  font-size: 20px;
+  font-style: italic;
+}
 

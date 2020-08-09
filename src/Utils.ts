@@ -19,12 +19,13 @@ export function copyArray<T>(ts: T[]): T[] {
     return ret;
 }
 
-export function sequenceColor(char: any): string{
+export function sequenceColor( char: string): string{
     return char === "A" ? "#E3A357" :
         char === "T" ? "#E9D063" :
             char === "C" ? "#5B967B" :
                 char === "G" ? "#3d999d" :
                     "white";
+
 }
 
 /*

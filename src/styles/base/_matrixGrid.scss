@@ -17,29 +17,3 @@
   grid-column: 2/3;
   grid-row: 2/3;
 }
-
-@media only screen and (max-width: 768px){
-  #createdMatrixComponent{
-    grid-template-columns: 65% 35%;
-    grid-template-rows: 20% 80%;
-  }
-}
-
-@media only screen and (max-width: 425px){
-  #createdMatrixComponent{
-    grid-template-columns: 65% 35%;
-    grid-template-rows: 60% 40%;
-  }
-  #algorithmComponent{
-    grid-column: 1/3;
-    grid-row: 2/3;
-  }
-  #alignedSequenceComponent{
-    grid-column: 1/2;
-    grid-row: 1/2;
-  }
-  #alignmentPathComponent{
-    grid-column: 2/3;
-    grid-row: 1/2;
-  }
-}

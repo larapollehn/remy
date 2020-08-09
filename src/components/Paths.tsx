@@ -29,7 +29,6 @@ const Paths = (props: Props) => {
      * visualize the first path directly after rendering
      */
     useEffect(() => {
-        console.log(paths);
         if(paths && paths.length > 0){
             // @ts-ignore
             const chosenPath: Cell[] = paths[0];

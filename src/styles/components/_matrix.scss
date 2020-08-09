@@ -1,4 +1,6 @@
 /* #alignedSequenceComponent */
+@import "../global/colors";
+
 .matrixTable{
   cursor: pointer;
 }
@@ -11,25 +13,30 @@
 }
 
 .innerCell{
-  color: #2d2d2d;
+  color: $innerCell;
+}
+
+.adenin{
+  background-color: $adenin;
+}
+.thymin{
+  background-color: $thymin;
+}
+.cytosin{
+  background-color: $cytosin;
+}
+.guanin{
+  background-color: $guanin;
 }
 
 .chosenPath{
-  background-color: cornflowerblue !important;
+  background-color: $chosenPath !important;
 }
 
 .selectedNode{
-  background-color: mediumaquamarine !important;
+  background-color: $selectedCell !important;
 }
 
 .ascenderNode{
-  background-color: thistle !important;
+  background-color: $ascendingCell !important;
 }
-
-@media only screen and (max-width: 425px){
-  .tableCells{
-    width: 30px;
-    height: 30px;
-  }
-}
-

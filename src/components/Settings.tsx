@@ -1,7 +1,9 @@
 import React, {useState} from "react";
 
 import Matrix from "./Matrix";
-import dna from "../dna_h.png";
+import mouse from "../mouse.png";
+import Infos from "./Infos";
+import Equation from "./Equation";
 
 const Settings = () => {
     const algorithms = ["Needleman-Wunsch Similarity", "Needleman-Wunsch Distance", "Smith-Waterman"];
@@ -30,11 +32,11 @@ const Settings = () => {
         }
     }
 
-    const dnaInput = (seq: string, char:string) => (event: any) => {
+    const dnaInput = (seq: string, char: string) => (event: any) => {
         let current;
-        if (seq === "seqA"){
+        if (seq === "seqA") {
             current = seqA;
-        } else if (seq === "seqB"){
+        } else if (seq === "seqB") {
             current = seqB;
         }
         setValues({...values, [seq]: current += char})
@@ -42,6 +44,12 @@ const Settings = () => {
 
     return (
         <div id="parentComponent">
+            <div id={"logoComponent"}>
+                <div className={"brand"}>
+                    <h1 className={"logoName"}>Remy <span className={"logoSub"}>- DNA Alignment</span></h1>
+                    <img className={"mouseLogo"} src={mouse} alt="cute little mouse"/>
+                </div>
+            </div>
             <div id="settingsComponent">
                 <div className="settingsContainer">
                     <h2 className={"settingHead"}>Choose Parameters</h2>
@@ -58,10 +66,10 @@ const Settings = () => {
                         <div className={"dnaInputContainer"}>
                             <input className={"sequenceInput"} id="seqA" type="text" value={seqA}
                                    onChange={handleInputChange("seqA")}/>
-                            <button className={"sequenceBtn adenin"} onClick={dnaInput("seqA","A")}>A</button>
-                            <button className={"sequenceBtn thymin"} onClick={dnaInput("seqA","T")}>T</button>
-                            <button className={"sequenceBtn cytosin"} onClick={dnaInput("seqA","C")}>C</button>
-                            <button className={"sequenceBtn guanin"} onClick={dnaInput("seqA","G")}>G</button>
+                            <button className={"sequenceBtn adenin"} onClick={dnaInput("seqA", "A")}>A</button>
+                            <button className={"sequenceBtn thymin"} onClick={dnaInput("seqA", "T")}>T</button>
+                            <button className={"sequenceBtn cytosin"} onClick={dnaInput("seqA", "C")}>C</button>
+                            <button className={"sequenceBtn guanin"} onClick={dnaInput("seqA", "G")}>G</button>
                         </div>
                     </div>
 
@@ -70,10 +78,10 @@ const Settings = () => {
                         <div className={"dnaInputContainer"}>
                             <input className={"sequenceInput"} id="seqB" type="text" value={seqB}
                                    onChange={handleInputChange("seqB")}/>
-                            <button className={"sequenceBtn adenin"} onClick={dnaInput("seqB","A")}>A</button>
-                            <button className={"sequenceBtn thymin"} onClick={dnaInput("seqB","T")}>T</button>
-                            <button className={"sequenceBtn cytosin"} onClick={dnaInput("seqB","C")}>C</button>
-                            <button className={"sequenceBtn guanin"} onClick={dnaInput("seqB","G")}>G</button>
+                            <button className={"sequenceBtn adenin"} onClick={dnaInput("seqB", "A")}>A</button>
+                            <button className={"sequenceBtn thymin"} onClick={dnaInput("seqB", "T")}>T</button>
+                            <button className={"sequenceBtn cytosin"} onClick={dnaInput("seqB", "C")}>C</button>
+                            <button className={"sequenceBtn guanin"} onClick={dnaInput("seqB", "G")}>G</button>
                         </div>
                     </div>
 
@@ -99,10 +107,14 @@ const Settings = () => {
                     <label className={"speedPickerLabel"}>Speed</label>
                     <div className={"speedInput"}>
                         <input name="speed" type="range" min="0" max="1000" id="speedPicker"
-                                                  onChange={handleSpeedChange}
-                                                  defaultValue={"1000"} style={{width: "100%"}}/>
+                               onChange={handleSpeedChange}
+                               defaultValue={"1000"} style={{width: "100%"}}/>
                     </div>
                 </div>
+                <br/>
+                <Equation algorithm={algorithm} matchScore={matchScore} mismatchScore={mismatchScore} gapScore={gapScore}/>
+                <br/>
+                <Infos/>
             </div>
 
             <div id="matrixComponent">

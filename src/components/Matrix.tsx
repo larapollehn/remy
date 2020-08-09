@@ -107,7 +107,7 @@ const Matrix = (props: Props) => {
                     </tr>
                     {matrix.map((elem, j) => (
                         <tr key={j}>
-                            <th className="tableCells"
+                            <th className="tableCells" id={`TCinner${j}`}
                                 style={{backgroundColor: sequenceColor(printSeqA[j])}}>{printSeqA[j]}</th>
                             {elem.map((cell: Cell, i: number) => (
                                 <th key={i}

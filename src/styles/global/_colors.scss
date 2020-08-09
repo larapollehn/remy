@@ -1,0 +1,24 @@
+/* General */
+$backgroundLeft: #bad2e7;
+
+
+/* Matrix */
+$chosenPath: cornflowerblue;
+$selectedCell: mediumaquamarine;
+$ascendingCell: thistle;
+$innerCell: #2d2d2d;
+
+/* DNA */
+$adenin: #E3A357;
+$thymin: #E9D063;
+$cytosin: #5B967B;
+$guanin: #3aa6ac;
+
+
+#logoComponent, #settingsComponent{
+  background-color: $backgroundLeft;
+}
+
+.algorithmSelect, .sequenceInput, .inputField, #logoComponent, #settingsComponent, .innerCell{
+  color: #1f1e1e;
+}
