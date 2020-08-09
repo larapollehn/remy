@@ -1,4 +1,5 @@
 /* #speedRangeComponent */
+@import "../global/colors";
 
 #speedRangeComponent{
   display: flex;
@@ -6,7 +7,7 @@
 }
 
 .speedRangeContainer{
-  background-color: #f15949;
+  background-color: $settingsBackground;
   border-radius: 0 0 5px 5px;
   width: 100%;
   text-align: left;

@@ -20,10 +20,10 @@ export function copyArray<T>(ts: T[]): T[] {
 }
 
 export function sequenceColor( char: string): string{
-    return char === "A" ? "#E3A357" :
-        char === "T" ? "#E9D063" :
-            char === "C" ? "#5B967B" :
-                char === "G" ? "#3aa6ac" :
+    return char === "A" ? "#8CC152" :
+        char === "T" ? "#3BAFDA" :
+            char === "C" ? "#E9573F" :
+                char === "G" ? "#F6BB42" :
                     "white";
 
 }

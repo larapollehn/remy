@@ -1,26 +1,33 @@
 /* General */
-$backgroundLeft: #184368;
+$backgroundLeftColor: #4B4A54;
 
+/* Settings */
+$settingsBackground: #868b90;
+$equationBackground: #868b90;
 
 /* Matrix */
-$chosenPath: cornflowerblue;
-$selectedCell: mediumaquamarine;
-$ascendingCell: thistle;
-$innerCell: #2d2d2d;
+$chosenPath: #D770AD;
+$selectedCell: #697ADC;
+$ascendingCell: #AC92EC;
+$innerCell: #e2dcdc;
 
 
 /* DNA */
 /* ATTENTION these colors must be changed manually in function sequenceColor in file Utils.tsx */
-$adenin: #E3A357;
-$thymin: #E9D063;
-$cytosin: #5B967B;
-$guanin: #3aa6ac;
+$adenin: #8CC152;
+$thymin: #3BAFDA;
+$cytosin:  #E9573F;
+$guanin: #F6BB42;
 
 
-#logoComponent, #settingsComponent{
-  background-color: $backgroundLeft;
+ #settingsComponent{
+  background-color: $backgroundLeftColor;
 }
 
-.algorithmSelect, .sequenceInput, .inputField, #logoComponent, #settingsComponent, .innerCell{
+#logoComponent{
+  background-color: $backgroundLeftColor;
+}
+
+.algorithmSelect, .sequenceInput, .inputField, #logoComponent, #settingsComponent{
   color: #1f1e1e;
 }

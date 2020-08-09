@@ -1,8 +1,9 @@
 @import "../global/paddingMargin";
+@import "../global/colors";
 
 .equationContainer{
   width: 100%;
-  background-color: #28a745;
+  background-color: $equationBackground;
   color: white;
   padding: $componentPadding 0;
   border-radius: $componentBorderRadius;

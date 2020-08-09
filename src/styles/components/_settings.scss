@@ -1,5 +1,6 @@
 /* #settingsComponent */
 @import "../global/paddingMargin";
+@import "../global/colors";
 
 #settingsComponent{
   padding: 0 $componentPadding 0 $componentPadding;
@@ -9,7 +10,7 @@
 .settingsContainer{
   border-radius: 5px 5px 0 0;
   padding: $componentPadding;
-  background-color: #f15949;
+  background-color: $settingsBackground;
   color: white;
   font-weight: bolder;
 }

@@ -19,6 +19,7 @@ const Matrix = (props: Props) => {
     const [matrix, setMatrix] = useState([]);
     const [texts, setTexts] = useState([]);
     const [paths, setPaths] = useState([]);
+    const [cellScores, setCellScores] = useState(new Map());
 
     const printSeqA: string[] = [' ', ...Array.from(seqA)];
     const printSeqB: string[] = [' ', ' ', ...Array.from(seqB)];
@@ -34,7 +35,30 @@ const Matrix = (props: Props) => {
         setMatrix(workers.algorithmMatrix.matrix);
         setTexts(workers.textProducer.produceText());
         setPaths(workers.algorithmMatrix.align());
+
+        gradientScores(workers.algorithmMatrix.matrix);
     };
+
+    /*
+    * finds highest and lowest score in matrix to later create a good gradient with background colors
+     */
+    const gradientScores = (cells: Cell[][]) => {
+        const scores = new Set();
+        for (let i = 0; i < cells.length; i++){
+            for (let j = 0; j < cells[i].length; j++){
+                scores.add(Number(cells[i][j].final_score));
+            }
+        }
+        console.log(scores);
+        // @ts-ignore
+        const sortedScores = Array.from(scores).sort((a,b) => a-b).reverse();
+        const stepSize = 190 / sortedScores.length; // 190 is the difference between the highest and lowest color score 200 and 10
+        const colorsScore = new Map();
+        for (let i = 0; i < sortedScores.length; i++){
+            colorsScore.set(sortedScores[i], ((stepSize*(i+1))))
+        }
+        setCellScores(colorsScore);
+    }
 
     const showAscenders = (cell: Cell) => (event: any) => {
         decolorCells(["ascenderNode", "selectedNode"]);
@@ -50,25 +74,8 @@ const Matrix = (props: Props) => {
     };
 
     const cellGradient = (score: number) => {
-        if (score <= -20) {
-            return "#d2eeed";
-        } else if (score <= -15) {
-            return "#bce6e4";
-        } else if (score <= -10) {
-            return "#a5dddc";
-        } else if (score <= -5) {
-            return "#8fd5d3";
-        } else if (score <= 0) {
-            return "#79cdca";
-        } else if (score <= 5) {
-            return "#62c4c2";
-        } else if (score <= 10) {
-            return "#4cbcb9";
-        } else if (score <= 15) {
-            return "#36b4b0";
-        } else if (score <= 20) {
-            return "#20aca8";
-        }
+        const color = cellScores.get(score);
+        return `rgb(${color},${color},${color})`;
     };
 
     // every time a change happens to one of the parameters, the matrix and texts should be generated again
@@ -84,14 +91,14 @@ const Matrix = (props: Props) => {
                     <tbody>
                     <tr>
                         {printSeqB.map((char, i) => (
-                            <th key={i} className="tableCells"
+                            <th key={i} className="tableCells sequenceCell"
                                 style={{backgroundColor: sequenceColor(char)}}
                             >{char}</th>
                         ))}
                     </tr>
                     {matrix.map((elem, j) => (
                         <tr key={j}>
-                            <th className="tableCells" id={`TCinner${j}`}
+                            <th className="tableCells sequenceCell" id={`TCinner${j}`}
                                 style={{backgroundColor: sequenceColor(printSeqA[j])}}>{printSeqA[j]}</th>
                             {elem.map((cell: Cell, i: number) => (
                                 <th key={i}
