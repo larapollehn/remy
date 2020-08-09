@@ -6,21 +6,8 @@ $logoHeight: 80px;
   padding: 2% 0 0 $componentPadding;
 }
 
-.logoName, .mouseLogo{
-  float: left;
-}
-.brand{
-  width: 90%;
-  margin: 0 auto;
-}
 .mouseLogo{
   height: $logoHeight;
+  margin-right: $componentPadding;
+  float: right;
 }
-.logoName{
-  line-height: $logoHeight;
-}
-.logoSub{
-  font-size: 20px;
-  font-style: italic;
-}
-

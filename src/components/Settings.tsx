@@ -50,7 +50,6 @@ const Settings = () => {
         <div id="parentComponent">
             <div id={"logoComponent"}>
                 <div className={"brand"}>
-                    <h1 className={"logoName"}>Remy <span className={"logoSub"}>- DNA Alignment</span></h1>
                     <img className={"mouseLogo"} src={mouse} alt="cute little mouse"/>
                 </div>
             </div>

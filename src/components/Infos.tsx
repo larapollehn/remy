@@ -1,17 +1,21 @@
 import React from "react";
 
+import github from "../github.png";
+import linkedin from "../linkedin.png"
 
 const Infos = () => {
 
     return(
         <div>
             <div className={"contactSection"}>
-                <h3>Find me and the source Code</h3>
-                <ul className={"contactList"}>
-                    <li className={"contactItem"}>Github</li>
-                    <li className={"contactItem"}>Website</li>
-                    <li className={"contactItem"}>Code</li>
-                </ul>
+                <a rel="noreferrer" target="_blank" href="https://github.com/larapollehn" className="socialName">
+                    <img id="githubLink" src={github}
+                         className="socialLink"/>
+                </a>
+                <a rel="noreferrer" target="_blank" href="https://www.linkedin.com/in/pollehn/" className="socialName">
+                    <img id="githubLink" src={linkedin}
+                         className="socialLink"/>
+                </a>
             </div>
         </div>
     )

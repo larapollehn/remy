@@ -9,7 +9,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: 20% 80%;
-  grid-template-rows: 10% 90%;
+  grid-template-rows: 6% 94%;
 }
 #logoComponent{
   grid-row: 1/2;
@@ -19,6 +19,10 @@
   grid-row: 2/3;
   grid-column: 1/2;
 }
+#logoComponent, #settingsComponent{
+  box-shadow:  3px 5px 3px #ccc;
+}
+
 #matrixComponent{
   grid-row: 1/3;
   grid-column: 2/3;
