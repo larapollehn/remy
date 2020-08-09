@@ -44,9 +44,9 @@ for(let i = 0; i < algorithmNames.length; i++){
  * needed to stop the program from crashing when choosing Needleman-Wunsch Distance with bad score parameters
  * it would calculate dozens of paths and freeze my laptop
  */
-const needlemanWunschSimilarityScores = {match: 1, mismatch: -1, gap: -2};
-const needlemanWunschDistanceScores = {match: -1, mismatch: 1, gap: 2};
-const smithWatermanScores = {match: 1, mismatch: -1, gap: -2};
+const needlemanWunschSimilarityScores = {match: 1, mismatch: -1, gap: -2, minmax: "max"};
+const needlemanWunschDistanceScores = {match: -1, mismatch: 1, gap: 2, minmax: "min"};
+const smithWatermanScores = {match: 1, mismatch: -1, gap: -2, minmax: "max"};
 
 const scores = [needlemanWunschSimilarityScores, needlemanWunschDistanceScores, smithWatermanScores];
 export const defaultScores = new Map();
