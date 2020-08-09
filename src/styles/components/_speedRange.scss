@@ -28,16 +28,3 @@
 #speedPicker{
   cursor: pointer;
 }
-
-@media only screen and(max-width: 425px){
-  #speedRangeComponent{
-    background-color: white;
-    align-items: center;
-    padding: 1%;
-  }
-  .speedRangeContainer{
-    width: 100%;
-    padding: 0;
-    border-radius: 0 0 5px 5px;
-  }
-}

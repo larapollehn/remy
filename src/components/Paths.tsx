@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {decolorCells, sequenceColor} from "../Utils";
 import Cell from "../algorithms/Cell";
 
@@ -10,6 +10,10 @@ interface Props {
 
 const Paths = (props: Props) => {
     const {texts, paths, speed} = props;
+    const [page, setPage] = useState(0);
+    const [pageMarker, setPageMarker] = useState([]);
+    const itemPerPage = 2;
+    const [visiblePaths, setVisiblePaths] = useState([]);
 
     const visualizePath = (index: number) => async (event: any) => {
         // @ts-ignore
@@ -17,7 +21,7 @@ const Paths = (props: Props) => {
         const selectedPath = document.getElementById(`P${index}`);
         const colorSpeed = 1000 - speed;
         decolorCells(["chosenPath", "selectedPath"]);
-        if(selectedPath){
+        if (selectedPath) {
             selectedPath.classList.add("selectedPath");
         }
         //color the cells belonging to the clicked path
@@ -28,14 +32,23 @@ const Paths = (props: Props) => {
         }
     };
 
+    const createPagination = () => {
+        const pages = Math.ceil(texts.length / itemPerPage);
+        const pageNumbers = [];
+        for (let i = 0; i < pages; i++){
+            pageNumbers.push(i+1);
+        }
+        setPageMarker(pageNumbers);
+    }
+
     /**
      * visualize the first path directly after rendering
      */
     useEffect(() => {
-        if(paths && paths.length > 0){
+        if (paths && paths.length > 0) {
             decolorCells(["chosenPath", "selectedPath"]);
             const selectedPath = document.getElementById(`P0`);
-            if(selectedPath){
+            if (selectedPath) {
                 selectedPath.classList.add("selectedPath");
             }
             // @ts-ignore
@@ -46,29 +59,46 @@ const Paths = (props: Props) => {
                 cell.classList.add("chosenPath");
             }
         }
+        setVisiblePaths(texts.slice(0, itemPerPage));
+        createPagination();
     }, [paths]);
 
     const sleep = (ms: number) => {
         return new Promise(resolve => setTimeout(resolve, ms))
     };
 
+    const changePage = (index: number) => {
+        const currentPaths = texts.slice(index*itemPerPage, (index*itemPerPage)+itemPerPage);
+        setVisiblePaths(currentPaths);
+       visualizePath(index);
+    }
+
     return (
-        <ul className="pathList">
-            {texts.map((path, i) => (
-                <li key={i} id={`P${i}`} onClick={visualizePath(i)} className="path">
-                    <div className={"sequence"}>
-                        <p className={"pathString"}>{Array.from(path[0]).map((char, i: number) => (
-                            <span className={"pathNucleotide upperNucleotide"} key={i}
-                                  style={{backgroundColor: sequenceColor(char)}}>{char}</span>
-                        ))}</p>
-                        <p className={"pathString"}>{Array.from(path[2]).map((char, i: number) => (
-                            <span className={"pathNucleotide lowerNucleotide"} key={i}
-                                  style={{backgroundColor: sequenceColor(char)}}>{char}</span>
-                        ))}</p>
-                    </div>
-                </li>
-            ))}
-        </ul>
+        <div>
+            <ul>
+                {
+                    pageMarker.map((marker, i) => (
+                        <li key={i} onClick={() => changePage(i)}>{marker}</li>
+                    ))
+                }
+            </ul>
+            <ul className="pathList">
+                {visiblePaths.map((path, i) => (
+                    <li key={i} id={`P${i}`} onClick={visualizePath(i)} className="path">
+                        <div className={"sequence"}>
+                            <p className={"pathString"}>{Array.from(path[0]).map((char: unknown, i: number) => (
+                                <span className={"pathNucleotide upperNucleotide"} key={i}
+                                      style={{backgroundColor: sequenceColor(char)}}>{char}</span>
+                            ))}</p>
+                            <p className={"pathString"}>{Array.from(path[2]).map((char, i: number) => (
+                                <span className={"pathNucleotide lowerNucleotide"} key={i}
+                                      style={{backgroundColor: sequenceColor(char)}}>{char}</span>
+                            ))}</p>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        </div>
     )
 }
 

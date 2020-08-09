@@ -49,7 +49,6 @@ const Matrix = (props: Props) => {
                 scores.add(Number(cells[i][j].final_score));
             }
         }
-        console.log(scores);
         // @ts-ignore
         const sortedScores = Array.from(scores).sort((a,b) => a-b).reverse();
         const stepSize = 190 / sortedScores.length; // 190 is the difference between the highest and lowest color score 200 and 10
