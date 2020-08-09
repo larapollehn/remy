@@ -8,8 +8,12 @@
   padding: 1.5%;
   margin-bottom: 2%;
   border-radius: 5px;
+  width: fit-content;
 }
 
+.selectedPath{
+  background-color: #868b90;
+}
 
 .pathNucleotide{
   margin: 3px;

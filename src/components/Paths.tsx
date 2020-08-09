@@ -12,11 +12,14 @@ const Paths = (props: Props) => {
     const {texts, paths, speed} = props;
 
     const visualizePath = (index: number) => async (event: any) => {
-        console.log('visualize');
         // @ts-ignore
         const chosenPath: Cell[] = paths[index];
+        const selectedPath = document.getElementById(`P${index}`);
         const colorSpeed = 1000 - speed;
-        decolorCells(["chosenPath"]);
+        decolorCells(["chosenPath", "selectedPath"]);
+        if(selectedPath){
+            selectedPath.classList.add("selectedPath");
+        }
         //color the cells belonging to the clicked path
         for (let i = 0; i < chosenPath.length; i++) {
             await sleep(colorSpeed);
@@ -30,6 +33,10 @@ const Paths = (props: Props) => {
      */
     useEffect(() => {
         if(paths && paths.length > 0){
+            const selectedPath = document.getElementById(`P0`);
+            if(selectedPath){
+                selectedPath.classList.add("selectedPath");
+            }
             // @ts-ignore
             const chosenPath: Cell[] = paths[0];
             decolorCells(["chosenPath"]);

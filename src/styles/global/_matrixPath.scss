@@ -1,10 +1,13 @@
+@import "../global/paddingMargin";
+
 #alignedSequenceComponent{
-    padding: 0 0 0 5%;
+    padding: 0 $componentPadding 0 $componentPadding;
     overflow: auto;
+    border-right: 1px solid lightgrey;
 }
 
 #alignmentPathComponent{
-    padding: 0 5%;
+    padding: 0 $componentPadding;
 }
 
 #alignedSequenceComponent, #alignmentPathComponent{
