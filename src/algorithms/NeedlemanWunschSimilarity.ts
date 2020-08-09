@@ -12,7 +12,8 @@ export default class NeedlemanWunschSimilarity extends AligningAlgorithm {
     match: number;
     mismatch: number;
     gap: number;
-    matrix: Cell[][]
+    matrix: Cell[][];
+    minmax: string;
 
     /**
      * Constructor
@@ -30,6 +31,7 @@ export default class NeedlemanWunschSimilarity extends AligningAlgorithm {
         this.mismatch = mismatch;
         this.gap = gap;
         this.matrix = [];
+        this.minmax = "max";
 
         // initialize the value-empty matrix with cells
         // this.sequence[...-1] because at 0/0 the matrix has null as x/y-values
@@ -136,5 +138,10 @@ export default class NeedlemanWunschSimilarity extends AligningAlgorithm {
             aligningQueue.shift();
         }
         return result;
+    }
+
+    tex(): string {
+        return `D_{i,j}=\\${this.minmax}\\begin{cases}D_{i-1,j-1}& + &\\phantom{-}${this.match}&a_i = b_j\\\\D_{i-1,j-1}& + &${this.mismatch}&a_i \\neq b_j\\\\
+D_{i-1,j}& + &${this.gap}&b_j = -\\\\D_{i,j-1}& + &${this.gap}&a_i = -\\end{cases}`;
     }
 }

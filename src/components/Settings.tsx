@@ -116,7 +116,7 @@ const Settings = () => {
                     </div>
                 </div>
                 <br/>
-                <Equation algorithm={algorithm} matchScore={matchScore} mismatchScore={mismatchScore} gapScore={gapScore}/>
+                <Equation algorithm={algorithm} matchScore={matchScore} mismatchScore={mismatchScore} gapScore={gapScore} seqB={seqB} seqA={seqA}/>
                 <br/>
                 <Infos/>
             </div>

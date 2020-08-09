@@ -9,7 +9,8 @@ export default class SmithWaterman extends AligningAlgorithm {
     mismatch: number;
     gap: number;
     topScore = 0;
-    matrix: Cell[][]
+    matrix: Cell[][];
+    minmax: string;
 
     /**
      * Constructor
@@ -27,6 +28,7 @@ export default class SmithWaterman extends AligningAlgorithm {
         this.mismatch = mismatch;
         this.gap = gap;
         this.matrix = [];
+        this.minmax = "max";
 
         // initialize the value-empty matrix with cells
         // this.sequence[...-1] because at 0/0 the matrix has null as x/y-values
@@ -158,5 +160,9 @@ export default class SmithWaterman extends AligningAlgorithm {
             aligningQueue.shift();
         }
         return result;
+    }
+
+    tex(): string {
+        return `S_{i,j}=\\${this.minmax}\\begin{cases}S_{i-1,j-1}& + &\\phantom{-}${this.match}&a_i = b_j\\\\S_{i-1,j-1}& + &${this.mismatch}&a_i \\neq b_j\\\\S_{i-1,j}& + &${this.gap}&b_j = -\\\\S_{i,j-1}& + &${this.gap}&a_i = -\\\\0\\end{cases}`;
     }
 }

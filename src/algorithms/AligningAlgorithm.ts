@@ -9,7 +9,8 @@ export default abstract class AligningAlgorithm {
     match: number;
     mismatch: number;
     gap: number;
-    matrix: Cell[][]
+    matrix: Cell[][];
+    minmax: string;
 
     /**
      * Minimal constructor for an aligning algorithm
@@ -33,6 +34,8 @@ export default abstract class AligningAlgorithm {
      * A 2D list, in which each list is a best result.
      */
     abstract align() : Cell[][];
+
+    abstract tex(): string;
 
     /**
      * prints the matrix in the console
