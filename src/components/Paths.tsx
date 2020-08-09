@@ -33,13 +33,13 @@ const Paths = (props: Props) => {
      */
     useEffect(() => {
         if(paths && paths.length > 0){
+            decolorCells(["chosenPath", "selectedPath"]);
             const selectedPath = document.getElementById(`P0`);
             if(selectedPath){
                 selectedPath.classList.add("selectedPath");
             }
             // @ts-ignore
             const chosenPath: Cell[] = paths[0];
-            decolorCells(["chosenPath"]);
             //color the cells belonging to the clicked path
             for (let i = 0; i < chosenPath.length; i++) {
                 const cell: HTMLElement = document.getElementById(`C${chosenPath[i].x_position}${chosenPath[i].y_position}`);
