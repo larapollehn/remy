@@ -20,7 +20,8 @@ const Equation = (props: Props) => {
     const tex = workers.algorithmMatrix.tex();
 
     return (
-        <div>
+        <div className={"equationContainer"}>
+            <h2 className={"settingHead"}>Recursion Equation</h2>
             <MathJax.Provider>
                 <div>
                     <MathJax.Node formula={tex}/>
