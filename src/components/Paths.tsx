@@ -11,7 +11,7 @@ interface Props {
 const Paths = (props: Props) => {
     const {texts, paths, speed} = props;
     const [pageMarker, setPageMarker] = useState([]); // the numbers for the pagination menu
-    const itemPerPage = 2; // use to slice an array
+    const itemPerPage = 5; // use to slice an array
     const [visibleTexts, setVisibleTexts] = useState([]); // the texts to be seen in the right menu, in form of their text strings
     const [visiblePaths, setVisiblePaths] = useState([])
 
@@ -86,11 +86,11 @@ const Paths = (props: Props) => {
         <div>
             <div id={"pagination"}>
                 <ul className={"pageMarkerList"}>
-                    {pageMarker.slice(0,1).map((marker, i) => (
+                    {pageMarker.length > 1 && pageMarker.slice(0,1).map((marker, i) => (
                         <li id={`M${i}`} className={"pageMarker selectedMarker"} key={i} onClick={() => changePage(i)}>{marker}</li>
                     ))}
                     {
-                        pageMarker.slice(1).map((marker, i) => (
+                        pageMarker.length > 1 && pageMarker.slice(1).map((marker, i) => (
                             <li id={`M${i+1}`} className={"pageMarker"} key={i} onClick={() => changePage(i+1)}>{marker}</li>
                         ))
                     }
