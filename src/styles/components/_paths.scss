@@ -1,5 +1,10 @@
 /* #alignmentPathComponent */
+.pathAndPagination{
+  width: 100%;
+  overflow: auto;
+}
 .pathList{
+  width: 100%;
   list-style: none;
   cursor: pointer;
 }

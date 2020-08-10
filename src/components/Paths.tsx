@@ -83,7 +83,7 @@ const Paths = (props: Props) => {
     }
 
     return (
-        <div>
+        <div className={"pathAndPagination"}>
             <div id={"pagination"}>
                 <ul className={"pageMarkerList"}>
                     {pageMarker.length > 1 && pageMarker.slice(0,1).map((marker, i) => (
