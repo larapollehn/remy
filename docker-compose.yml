@@ -1,0 +1,8 @@
+version: "3"
+services:
+  remy:
+    container_name: remy
+    build: ./
+    restart: always
+    ports:
+    - 8080:80

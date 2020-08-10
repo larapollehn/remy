@@ -11,13 +11,14 @@ interface Props {
 const Paths = (props: Props) => {
     const {texts, paths, speed} = props;
     const [page, setPage] = useState(0);
-    const [pageMarker, setPageMarker] = useState([]);
-    const itemPerPage = 2;
-    const [visiblePaths, setVisiblePaths] = useState([]);
+    const [pageMarker, setPageMarker] = useState([]); // the numbers for the pagination menu
+    const itemPerPage = 2; // use to slice an array
+    const [visibleTexts, setVisibleTexts] = useState([]); // the texts to be seen in the right menu, in form of their text strings
+    const [visiblePaths, setVisiblePaths] = useState([])
 
     const visualizePath = (index: number) => async (event: any) => {
         // @ts-ignore
-        const chosenPath: Cell[] = paths[index];
+        const chosenPath: Cell[] = visiblePaths[index];
         const selectedPath = document.getElementById(`P${index}`);
         const colorSpeed = 1000 - speed;
         decolorCells(["chosenPath", "selectedPath"]);
@@ -45,6 +46,7 @@ const Paths = (props: Props) => {
      * visualize the first path directly after rendering
      */
     useEffect(() => {
+        console.log(visiblePaths, visibleTexts);
         if (visiblePaths && visiblePaths.length > 0) {
             decolorCells(["chosenPath", "selectedPath"]);
             const selectedPath = document.getElementById(`P0`);
@@ -52,7 +54,7 @@ const Paths = (props: Props) => {
                 selectedPath.classList.add("selectedPath");
             }
             // @ts-ignore
-            const chosenPath: Cell[] = paths[0];
+            const chosenPath: Cell[] = visiblePaths[0];
             //color the cells belonging to the clicked path
             for (let i = 0; i < chosenPath.length; i++) {
                 const cell: HTMLElement = document.getElementById(`C${chosenPath[i].x_position}${chosenPath[i].y_position}`);
@@ -60,10 +62,11 @@ const Paths = (props: Props) => {
             }
         }
         createPagination();
-    }, [visiblePaths]);
+    }, [visibleTexts]);
 
     useEffect(() => {
-        setVisiblePaths(texts.slice(0, itemPerPage));
+        setVisibleTexts(texts.slice(0, itemPerPage));
+        setVisiblePaths(paths.slice(0, itemPerPage));
     }, [paths])
 
     const sleep = (ms: number) => {
@@ -71,8 +74,9 @@ const Paths = (props: Props) => {
     };
 
     const changePage = (index: number) => {
-        const currentPaths = texts.slice(index*itemPerPage, (index*itemPerPage)+itemPerPage);
-        setVisiblePaths(currentPaths);
+        setPage(index);
+        setVisibleTexts(texts.slice(index*itemPerPage, (index*itemPerPage)+itemPerPage));
+        setVisiblePaths(paths.slice(index*itemPerPage, (index*itemPerPage)+itemPerPage))
        visualizePath(index);
     }
 
@@ -86,7 +90,7 @@ const Paths = (props: Props) => {
                 }
             </ul>
             <ul className="pathList">
-                {visiblePaths.map((path, i) => (
+                {visibleTexts.map((path, i) => (
                     <li key={i} id={`P${i}`} onClick={visualizePath(i)} className="path">
                         <div className={"sequence"}>
                             <p className={"pathString"}>{Array.from(path[0]).map((char: unknown, i: number) => (
