@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Cell from "../algorithms/Cell";
-import {decolorCells, sequenceColor} from "../Utils";
+import {decolor, sequenceColor} from "../Utils";
 import Paths from "./Paths";
 import {setupFunction} from "../Globals";
 
@@ -60,7 +60,7 @@ const Matrix = (props: Props) => {
     }
 
     const showAscenders = (cell: Cell) => (event: any) => {
-        decolorCells(["ascenderNode", "selectedNode"]);
+        decolor(["ascenderNode", "selectedNode"]);
         const clickedCell = document.getElementById(`C${cell.x_position}${cell.y_position}`);
         const ascenders = [cell.top_ascender, cell.left_ascender, cell.top_left_ascender]
         for (let i = 0; i < ascenders.length; i++) {
@@ -79,7 +79,7 @@ const Matrix = (props: Props) => {
 
     // every time a change happens to one of the parameters, the matrix and texts should be generated again
     useEffect(() => {
-        decolorCells(["chosenPath", "ascenderNode", "selectedNode"]);
+        decolor(["chosenPath", "ascenderNode", "selectedNode"]);
         setupMatrix();
     }, [algorithm, seqA, seqB, matchScore, mismatchScore, gapScore])
 

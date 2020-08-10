@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {decolorCells, sequenceColor} from "../Utils";
+import {decolor, sequenceColor} from "../Utils";
 import Cell from "../algorithms/Cell";
 
 interface Props {
@@ -10,7 +10,6 @@ interface Props {
 
 const Paths = (props: Props) => {
     const {texts, paths, speed} = props;
-    const [page, setPage] = useState(0);
     const [pageMarker, setPageMarker] = useState([]); // the numbers for the pagination menu
     const itemPerPage = 2; // use to slice an array
     const [visibleTexts, setVisibleTexts] = useState([]); // the texts to be seen in the right menu, in form of their text strings
@@ -21,7 +20,7 @@ const Paths = (props: Props) => {
         const chosenPath: Cell[] = visiblePaths[index];
         const selectedPath = document.getElementById(`P${index}`);
         const colorSpeed = 1000 - speed;
-        decolorCells(["chosenPath", "selectedPath"]);
+        decolor(["chosenPath", "selectedPath"]);
         if (selectedPath) {
             selectedPath.classList.add("selectedPath");
         }
@@ -46,10 +45,9 @@ const Paths = (props: Props) => {
      * visualize the first path directly after rendering
      */
     useEffect(() => {
-        console.log(visiblePaths, visibleTexts);
         if (visiblePaths && visiblePaths.length > 0) {
-            decolorCells(["chosenPath", "selectedPath"]);
-            const selectedPath = document.getElementById(`P0`);
+            decolor(["chosenPath", "selectedPath"]);
+            const selectedPath = document.getElementById(`P0`); // get the first path
             if (selectedPath) {
                 selectedPath.classList.add("selectedPath");
             }
@@ -62,7 +60,7 @@ const Paths = (props: Props) => {
             }
         }
         createPagination();
-    }, [visibleTexts]);
+    }, [visiblePaths]);
 
     useEffect(() => {
         setVisibleTexts(texts.slice(0, itemPerPage));
@@ -74,37 +72,48 @@ const Paths = (props: Props) => {
     };
 
     const changePage = (index: number) => {
-        setPage(index);
         setVisibleTexts(texts.slice(index*itemPerPage, (index*itemPerPage)+itemPerPage));
         setVisiblePaths(paths.slice(index*itemPerPage, (index*itemPerPage)+itemPerPage))
-       visualizePath(index);
+        visualizePath(index);
+        decolor(["selectedMarker"]);
+        const marker = document.getElementById(`M${index}`);
+        if(marker){
+            marker.classList.add("selectedMarker");
+        }
     }
 
     return (
         <div>
-            <ul>
-                {
-                    pageMarker.map((marker, i) => (
-                        <li key={i} onClick={() => changePage(i)}>{marker}</li>
-                    ))
-                }
-            </ul>
-            <ul className="pathList">
-                {visibleTexts.map((path, i) => (
-                    <li key={i} id={`P${i}`} onClick={visualizePath(i)} className="path">
-                        <div className={"sequence"}>
-                            <p className={"pathString"}>{Array.from(path[0]).map((char: unknown, i: number) => (
-                                <span className={"pathNucleotide upperNucleotide"} key={i}
-                                      style={{backgroundColor: sequenceColor(char)}}>{char}</span>
-                            ))}</p>
-                            <p className={"pathString"}>{Array.from(path[2]).map((char, i: number) => (
-                                <span className={"pathNucleotide lowerNucleotide"} key={i}
-                                      style={{backgroundColor: sequenceColor(char)}}>{char}</span>
-                            ))}</p>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+            <div id={"pagination"}>
+                <ul className={"pageMarkerList"}>
+                    {pageMarker.slice(0,1).map((marker, i) => (
+                        <li id={`M${i}`} className={"pageMarker selectedMarker"} key={i} onClick={() => changePage(i)}>{marker}</li>
+                    ))}
+                    {
+                        pageMarker.slice(1).map((marker, i) => (
+                            <li id={`M${i+1}`} className={"pageMarker"} key={i} onClick={() => changePage(i+1)}>{marker}</li>
+                        ))
+                    }
+                </ul>
+            </div>
+            <div>
+                <ul className="pathList">
+                    {visibleTexts.map((path, i) => (
+                        <li key={i} id={`P${i}`} onClick={visualizePath(i)} className="path">
+                            <div className={"sequence"}>
+                                <p className={"pathString"}>{Array.from(path[0]).map((char: unknown, i: number) => (
+                                    <span className={"pathNucleotide upperNucleotide"} key={i}
+                                          style={{backgroundColor: sequenceColor(char)}}>{char}</span>
+                                ))}</p>
+                                <p className={"pathString"}>{Array.from(path[2]).map((char, i: number) => (
+                                    <span className={"pathNucleotide lowerNucleotide"} key={i}
+                                          style={{backgroundColor: sequenceColor(char)}}>{char}</span>
+                                ))}</p>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     )
 }

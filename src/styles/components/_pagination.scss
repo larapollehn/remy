@@ -1,0 +1,27 @@
+
+
+.pageMarkerList{
+  list-style: none;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.pageMarker{
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #bebebe;
+  padding: 3px 7px;
+  border-radius: 5px;
+  color: white;
+}
+
+.pageMarker:hover{
+  background-color: #a7a5a5;
+}
+
+.selectedMarker{
+  background-color: #868b90;
+  color: #2e2d2d;
+}

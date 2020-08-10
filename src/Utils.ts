@@ -31,7 +31,7 @@ export function sequenceColor(char: unknown): string{
 /*
     takes an array with class names and removes it from all elements
      */
-export function decolorCells(name: string[]): void{
+export function decolor(name: string[]): void{
     for (let i = 0; i < name.length; i++) {
         const coloredCells = document.getElementsByClassName(name[i]);
         while (coloredCells.length > 0) {
