@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-
 import "./styles/styles.scss";
 import Home from "./components/Home";
 
