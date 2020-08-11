@@ -94,3 +94,6 @@ const smithWatermanTextProducer = new SimpleTextProducer(smithWaterman);
 const smithWatermanTexts = smithWatermanTextProducer.produceText();
 console.log(smithWatermanTexts);
 ```
+
+####References
+* [Uni Freiburg RNA Visualisierungs Tool](http://rna.informatik.uni-freiburg.de/Teaching/index.jsp?toolName=Needleman-Wunsch)
