@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.com/larapollehn/remy.svg?token=XA6Ut1BA6qs5Z8RuPjz2&branch=master)](https://travis-ci.com/larapollehn/remy)
 # Remys Lab
 
-####[Live Demo](https://remy.larapollehn.de/)
+#### [Live Demo](https://remy.larapollehn.de/)
 
 Remys Lab is an application that provides multiple algorithms, takes a specific set of parameters and visualizes all 
 possible paths leading to the best alignment-score. 
