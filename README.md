@@ -37,13 +37,6 @@ Aligned sequences of nucleotide or amino acid residues are typically represented
 between the residues so that identical or similar characters are aligned in successive columns. Sequence alignments are also used 
 for non-biological sequences, such as calculating the distance cost between strings in a natural language or in financial data.
 
-<table border="1" width="100%">
-    <tr>
-        <td><img src="images/dotplot.png" width="200"></td>
-        <td><img src="images/dna-repeats.jpg" width="200"></td>
-    </tr>
-</table>
-
 ## Needleman-Wunsch
 
 Saul B. Needleman and Christian D. Wunsch introduced 1970 an approach to compute the optimal global alignment of two sequences for comparing 
@@ -95,5 +88,13 @@ const smithWatermanTexts = smithWatermanTextProducer.produceText();
 console.log(smithWatermanTexts);
 ```
 
-####References
+#### Remy? Origin of the name
+One of my favourite movies is Ratatouille. A newer Disney movie based on a tiny, passionate rat that wants to be a cook.
+This rat gave me hope, that everything is possible and that I will become a developer if I work hard enough and believe in myself.
+
+Anyone can code!
+
+![alt app](images/remy.jpeg)
+
+#### References
 * [Uni Freiburg RNA Visualisierungs Tool](http://rna.informatik.uni-freiburg.de/Teaching/index.jsp?toolName=Needleman-Wunsch)
