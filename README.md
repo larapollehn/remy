@@ -13,10 +13,10 @@ possible paths leading to the best alignment-score.
 
 <table border="1" width="100%">
     <tr>
-        <td><img src="images/remy_tutorial.png" width="100%"></td>
+        <td><img src="images/tutorial.gif" width="100%"></td>
     </tr>
      <tr>
-            <td><img src="images/remy_algorithm.png" width="100%"></td>
+            <td><img src="images/paths.gif" width="100%"></td>
         </tr>
 </table>
 
