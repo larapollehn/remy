@@ -1,5 +1,26 @@
 [![Build Status](https://travis-ci.com/larapollehn/remy.svg?token=XA6Ut1BA6qs5Z8RuPjz2&branch=master)](https://travis-ci.com/larapollehn/remy)
 
+
+## Remys Lab - Webapp 
+
+Remys Lab is an application that provides multiple algorithms, takes a specific set of parameters and visualizes all 
+possible paths leading to the best alignment-score. 
+
+##### Available algorithms
+* Smith-Waterman
+* Needleman-Wunsch Distance
+* Needleman-Wunsch Similarity
+
+<table border="1" width="100%">
+    <tr>
+        <td><img src="images/remy_tutorial.png" width="100%"></td>
+    </tr>
+     <tr>
+            <td><img src="images/remy_algorithm.png" width="100%"></td>
+        </tr>
+</table>
+
+
 # DNA alignment visualization
 
 Visualization of algorithms for nucleotide alignment.
@@ -18,8 +39,8 @@ for non-biological sequences, such as calculating the distance cost between stri
 
 <table border="1" width="100%">
     <tr>
-        <td><img src="images/dotplot.png" width="50%"></td>
-        <td><img src="images/dna-repeats.jpg" width="50%"></td>
+        <td><img src="images/dotplot.png" width="200"></td>
+        <td><img src="images/dna-repeats.jpg" width="200"></td>
     </tr>
 </table>
 
@@ -73,22 +94,3 @@ const smithWatermanTextProducer = new SimpleTextProducer(smithWaterman);
 const smithWatermanTexts = smithWatermanTextProducer.produceText();
 console.log(smithWatermanTexts);
 ```
-
-## Remys Lab - Webapp 
-
-Remys Lab is an application that provides multiple algorithms, takes a specific set of parameters and visualizes all 
-possible paths leading to the best alignment-score. 
-
-##### Available algorithms
-* Smith-Waterman
-* Needleman-Wunsch Distance
-* Needleman-Wunsch Similarity
-
-<table border="1" width="100%">
-    <tr>
-        <td><img src="images/remy_tutorial.png" width="100%"></td>
-    </tr>
-     <tr>
-            <td><img src="images/remy_algorithm.png" width="100%"></td>
-        </tr>
-</table>
