@@ -4,7 +4,7 @@
 
 Visualization of algorithms for nucleotide alignment.
 
-The DNA are the fundamental building blocks of a living cell and are made up of nucleotide chain.
+The DNA is the fundamental building block of a living cell and is made up of a nucleotide chain.
 
 There are four kinds of nucleotide, each differentiated from each other by its Nucleobase `guanine`, `adenine`, `cytosine` and `thymine`.
 
@@ -18,8 +18,8 @@ for non-biological sequences, such as calculating the distance cost between stri
 
 <table border="1" width="100%">
     <tr>
-        <td><img src="images/dotplot.png" width="200"></td>
-        <td><img src="images/dna-repeats.jpg" width="200"></td>
+        <td><img src="images/dotplot.png" width="50%"></td>
+        <td><img src="images/dna-repeats.jpg" width="50%"></td>
     </tr>
 </table>
 
@@ -34,7 +34,7 @@ The Smith–Waterman algorithm performs local sequence alignment; that is, for d
 sequences or protein sequences. Instead of looking at the entire sequence, the Smith–Waterman algorithm compares segments of all possible lengths and 
 optimizes the similarity measure.
 
-## Usages
+## Usage of the algorithms
 
 Needleman-Wunsch similarity
 
@@ -73,3 +73,22 @@ const smithWatermanTextProducer = new SimpleTextProducer(smithWaterman);
 const smithWatermanTexts = smithWatermanTextProducer.produceText();
 console.log(smithWatermanTexts);
 ```
+
+## Remys Lab - Webapp 
+
+Remys Lab is an application that provides multiple algorithms, takes a specific set of parameters and visualizes all 
+possible paths leading to the best alignment-score. 
+
+##### Available algorithms
+* Smith-Waterman
+* Needleman-Wunsch Distance
+* Needleman-Wunsch Similarity
+
+<table border="1" width="100%">
+    <tr>
+        <td><img src="images/remy_tutorial.png" width="100%"></td>
+    </tr>
+     <tr>
+            <td><img src="images/remy_algorithm.png" width="100%"></td>
+        </tr>
+</table>
