@@ -20,6 +20,7 @@
     "react-mathjax": "^1.0.1",
     "react-scripts": "3.4.1",
     "sass": "^1.26.10",
+    "ts-jest": "^26.1.4",
     "typescript": "^3.7.5"
   },
   "scripts": {
