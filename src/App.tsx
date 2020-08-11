@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 
-import Settings from "./components/Settings";
 import "./styles/styles.scss";
+import Home from "./components/Home";
 
 const App = () => {
   return (
     <div className="App">
-      <Settings/>
+      <Home/>
     </div>
   );
 }
