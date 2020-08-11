@@ -1,15 +1,19 @@
 import React, {ReactElement, useState} from "react";
 
-import mouse from "../mouse.png";
+import algo from "../algo.gif";
+import settings from "../settings.gif";
+import equation from "../equation.gif";
+import speed from "../speed.gif";
+import visualization from "../paths.gif";
 
-const pageOne = {index: 0, page: 1, text: "blu bla blub", image: mouse, next: true, prev: false};
-const pageTwo = {index: 1, page: 2, text: "la la lu lu", image: mouse, next: true, prev: true};
-const pageThree = {index: 2, page: 3, text: "hehe hihi huhu", image: mouse, next: true, prev: true};
-const pageFour = {index: 3, page: 4, text: "yaaaaasss", image: mouse, next: false, prev: true};
-const pages = [pageOne, pageTwo, pageThree, pageFour];
+const pageOne = {index: 0, page: 1, text: "Choose an algorithm", image: algo, next: true, prev: false};
+const pageTwo = {index: 1, page: 2, text: "Set the parameters as needed", image: settings, next: true, prev: true};
+const pageThree = {index: 2, page: 3, text: "Choose a path to see the traceback from the best score", image: visualization, next: true, prev: true};
+const pageFour = {index: 3, page: 4, text: "Change the speed of the path visualization", image: speed, next: true, prev: true};
+const pageFive = {index: 3, page: 4, text: "Take a look at the recursion equation", image: equation, next: false, prev: true};
+const pages = [pageOne, pageTwo, pageThree, pageFour, pageFive];
 
 const Tutorial = ():ReactElement => {
-    const [next, setNext] = useState(true);
     const [step, setStep] = useState(pageOne);
     const {page, text, image} = step;
 
@@ -23,9 +27,8 @@ const Tutorial = ():ReactElement => {
 
     return (
         <div>
-            <h3>Step {page}</h3>
-            <img src={image} alt={"tutorial image"} style={{width: "100px"}}/>
-            <p>{text}</p>
+            <h2>{text}</h2>
+            <img src={image} alt={"tutorial image"}/>
             {step.prev &&
                 <button onClick={changeStep(step.index, "prev")}>Previous</button>
             }

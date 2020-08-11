@@ -11,6 +11,7 @@ const Home = ():ReactElement => {
                     <h2>Welcome to Remys Lab</h2>
                     <Tutorial/>
                     <button onClick={() => setShowTutorial(false)}>Skip Tutorial</button>
+                    <button onClick={() => setShowTutorial(false)}>Close</button>
                 </div>
             }
             {!showTutorial &&
