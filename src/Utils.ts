@@ -24,7 +24,6 @@ export function sequenceColor(char: unknown): string{
         char === "T" ? "#3BAFDA" :
             char === "C" ? "#E9573F" :
                 char === "G" ? "#F6BB42" :
-                    char === " " ? "white":
                         "lightgrey";
 
 }

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import Settings from "./components/Settings";
 import "./styles/styles.scss";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <Settings/>

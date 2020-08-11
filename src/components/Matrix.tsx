@@ -22,7 +22,7 @@ const Matrix = (props: Props) => {
     const [cellScores, setCellScores] = useState(new Map());
 
     const printSeqA: string[] = [' ', ...Array.from(seqA)];
-    const printSeqB: string[] = [' ', ' ', ...Array.from(seqB)];
+    const printSeqB: string[] = ['D/S', ' ', ...Array.from(seqB)];
 
     /*
     create a matrix based on parameters and align the path(s)
