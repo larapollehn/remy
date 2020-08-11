@@ -36,6 +36,25 @@
   background-color: $chosenPath !important;
 }
 
+.pulse{
+  transform: scale(1);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.85);
+  }
+
+  70% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0.85);
+  }
+}
+
 .selectedNode{
   background-color: $selectedCell !important;
 }

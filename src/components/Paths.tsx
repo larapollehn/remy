@@ -11,7 +11,7 @@ interface Props {
 const Paths = (props: Props) => {
     const {texts, paths, speed} = props;
     const [pageMarker, setPageMarker] = useState([]); // the numbers for the pagination menu
-    const itemPerPage = 5; // use to slice an array
+    const itemPerPage = 10; // use to slice an array
     const [visibleTexts, setVisibleTexts] = useState([]); // the texts to be seen in the right menu, in form of their text strings
     const [visiblePaths, setVisiblePaths] = useState([])
 
@@ -20,7 +20,7 @@ const Paths = (props: Props) => {
         const chosenPath: Cell[] = visiblePaths[index];
         const selectedPath = document.getElementById(`P${index}`);
         const colorSpeed = 1000 - speed;
-        decolor(["chosenPath", "selectedPath"]);
+        decolor(["chosenPath", "selectedPath", "pulse"]);
         if (selectedPath) {
             selectedPath.classList.add("selectedPath");
         }
@@ -29,6 +29,7 @@ const Paths = (props: Props) => {
             await sleep(colorSpeed);
             const cell: HTMLElement = document.getElementById(`C${chosenPath[i].x_position}${chosenPath[i].y_position}`);
             cell.classList.add("chosenPath");
+            cell.classList.add("pulse");
         }
     };
 
@@ -46,7 +47,7 @@ const Paths = (props: Props) => {
      */
     useEffect(() => {
         if (visiblePaths && visiblePaths.length > 0) {
-            decolor(["chosenPath", "selectedPath"]);
+            decolor(["chosenPath", "selectedPath", "pulse"]);
             const selectedPath = document.getElementById(`P0`); // get the first path
             if (selectedPath) {
                 selectedPath.classList.add("selectedPath");
@@ -57,6 +58,7 @@ const Paths = (props: Props) => {
             for (let i = 0; i < chosenPath.length; i++) {
                 const cell: HTMLElement = document.getElementById(`C${chosenPath[i].x_position}${chosenPath[i].y_position}`);
                 cell.classList.add("chosenPath");
+                cell.classList.add("pulse");
             }
         }
         createPagination();
@@ -84,18 +86,6 @@ const Paths = (props: Props) => {
 
     return (
         <div className={"pathAndPagination"}>
-            <div id={"pagination"}>
-                <ul className={"pageMarkerList"}>
-                    {pageMarker.length > 1 && pageMarker.slice(0,1).map((marker, i) => (
-                        <li id={`M${i}`} className={"pageMarker selectedMarker"} key={i} onClick={() => changePage(i)}>{marker}</li>
-                    ))}
-                    {
-                        pageMarker.length > 1 && pageMarker.slice(1).map((marker, i) => (
-                            <li id={`M${i+1}`} className={"pageMarker"} key={i} onClick={() => changePage(i+1)}>{marker}</li>
-                        ))
-                    }
-                </ul>
-            </div>
             <div>
                 <ul className="pathList">
                     {visibleTexts.map((path, i) => (
@@ -112,6 +102,18 @@ const Paths = (props: Props) => {
                             </div>
                         </li>
                     ))}
+                </ul>
+            </div>
+            <div id={"pagination"}>
+                <ul className={"pageMarkerList"}>
+                    {pageMarker.length > 1 && pageMarker.slice(0,1).map((marker, i) => (
+                        <li id={`M${i}`} className={"pageMarker selectedMarker"} key={i} onClick={() => changePage(i)}>{marker}</li>
+                    ))}
+                    {
+                        pageMarker.length > 1 && pageMarker.slice(1).map((marker, i) => (
+                            <li id={`M${i+1}`} className={"pageMarker"} key={i} onClick={() => changePage(i+1)}>{marker}</li>
+                        ))
+                    }
                 </ul>
             </div>
         </div>

@@ -2,13 +2,13 @@
   list-style: none;
   cursor: pointer;
   margin-bottom: 15px;
-  max-height: 300px;
+  max-height: 130px;
   overflow: auto;
 }
 
 .pageMarker{
   display: inline-block;
-  margin-right: 10px;
+  margin: 0 10px 10px 0;
   font-size: 18px;
   font-weight: bold;
   background-color: #bebebe;

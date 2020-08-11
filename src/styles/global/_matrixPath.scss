@@ -3,11 +3,13 @@
 #alignedSequenceComponent{
     padding: 0 $componentPadding 0 $componentPadding;
     overflow: auto;
-    border-right: 1px solid lightgrey;
 }
 
 #alignmentPathComponent{
-    padding: 0 $componentPadding;
+    padding: $componentPadding;
+    border: 1px dashed lightgrey;
+    border-radius: 5px;
+    margin: 0 $componentPadding $componentPadding $componentPadding;
 }
 
 #alignedSequenceComponent, #alignmentPathComponent{
