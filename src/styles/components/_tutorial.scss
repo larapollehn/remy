@@ -1,0 +1,45 @@
+#tutorialContainer, .homeTutorialSection{
+  text-align: center;
+}
+
+.tutorialTitle{
+  margin-bottom: 20px;
+  padding-top: 40px;
+  font-size: 2vw;
+  font-weight: bold;
+  color: #1f1e1e;
+}
+
+.stepTitle{
+  font-size: 1.3vw;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.imageContainer{
+  width: 100%;
+}
+
+.stepImage{
+  min-width: 300px;
+  border-radius: 5px;
+}
+
+.stepBtn, .tutorialBtn{
+ padding: 3px 5px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #333239;
+  color: white;
+  margin: 0 5px;
+}
+
+.stepBtn:hover{
+  background-color: #4d4b55;
+}
+
+.tutorialBtn{
+  margin-top: 10px;
+}

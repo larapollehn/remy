@@ -2,20 +2,18 @@ import React, {ReactElement, useState} from "react";
 import Settings from "./Settings";
 import Tutorial from "./Tutorial";
 
-const Home = ():ReactElement => {
+const Home = (): ReactElement => {
     const [showTutorial, setShowTutorial] = useState(true);
     return (
-        <div>
+        <div id={"home"}>
             {showTutorial &&
-                <div>
-                    <h2>Welcome to Remys Lab</h2>
-                    <Tutorial/>
-                    <button onClick={() => setShowTutorial(false)}>Skip Tutorial</button>
-                    <button onClick={() => setShowTutorial(false)}>Close</button>
-                </div>
+            <div className={"homeTutorialSection"}>
+                <button className={"tutorialBtn skipBtn"} onClick={() => setShowTutorial(false)}>Close Tutorial</button>
+                <Tutorial/>
+            </div>
             }
             {!showTutorial &&
-                <Settings/>
+            <Settings/>
             }
         </div>
     )
