@@ -10,6 +10,7 @@
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.85); /* Black w/ opacity */
+  backdrop-filter: blur(7px);
 }
 
 .tutorialTitle{
